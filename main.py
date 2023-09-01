@@ -87,6 +87,7 @@ def admins_only(func):
 
 @app.route('/coming-soonest')
 def coming_soonest():
+    #added
     return render_template("coming-soon-copy.html")
 
 
