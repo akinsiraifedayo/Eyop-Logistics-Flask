@@ -226,7 +226,7 @@
 
 	// Count Time JS
 	function makeTimer() {
-		var endTime = new Date("november  30, 2021 17:00:00 PDT");			
+		var endTime = new Date("september  7, 2023 17:00:00 PDT");			
 		var endTime = (Date.parse(endTime)) / 1000;
 		var now = new Date();
 		var now = (Date.parse(now) / 1000);
