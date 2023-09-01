@@ -83,9 +83,13 @@ def admins_only(func):
             return abort(403)
     return decorated_func
 
-@app.route('/coming-soonest')
+@app.route('/coming-soonest', methods=["POST", "GET"])
 def coming_soonest():
-    #added
+    if request.method == "POST":
+        email = request.form.get("EMAIL")
+        with open("subscribers.txt", "a") as file:
+            # Append the content to the file
+            file.write(email)
     return render_template("coming-soon-copy.html")
 
 
