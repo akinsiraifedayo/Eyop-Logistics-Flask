@@ -83,14 +83,31 @@ def admins_only(func):
             return abort(403)
     return decorated_func
 
+
+
+
+def isValidEmail(email):
+    # Basic email validation example (customize as needed)
+    import re
+    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(email_pattern, email)
+
 @app.route('/coming-soonest', methods=["POST", "GET"])
 def coming_soonest():
+    subscribed = request.args.get('subscribed', default=False, type=bool)
     if request.method == "POST":
         email = request.form.get("EMAIL")
-        with open("subscribers.txt", "a") as file:
-            # Append the content to the file
-            file.write(email)
-    return render_template("coming-soon-copy.html")
+        if isValidEmail(email):
+            # Email is valid
+            with open("subscribers.txt", "a") as file:
+                file.write(email + "\n")
+            return redirect(url_for("coming_soonest", subscribed=True))
+        else:
+            # Email is not valid
+            flash("Please enter a valid email address.", "danger")
+            return redirect(url_for("coming_soonest"))
+            
+    return render_template("coming-soon-copy.html", subscribed=subscribed)
 
 
 @app.route('/')
