@@ -61,8 +61,6 @@ class Comment(db.Model):
     blog_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
     text = db.Column(db.Text, nullable=False)
 
-    
-
 
 
 
