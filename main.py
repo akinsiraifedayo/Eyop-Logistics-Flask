@@ -85,6 +85,11 @@ def admins_only(func):
             return abort(403)
     return decorated_func
 
+@app.route('/coming-soonest')
+def coming_soonest():
+    return render_template("coming-soon-copy.html")
+
+
 @app.route('/')
 def home():
     return render_template("index.html")
