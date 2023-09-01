@@ -10,30 +10,30 @@
 		<!-- Owl Theme Default Min CSS --> 
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
 		<!-- Owl Carousel Min CSS --> 
-		<link rel="stylesheet" href="css/owl.carousel.min.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
 		<!-- Animate Min CSS --> 
-		<link rel="stylesheet" href="css/animate.min.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
 		<!-- Boxicons Min CSS --> 
-		<link rel="stylesheet" href="css/boxicons.min.css"> 
+		<link rel="stylesheet" href="{{ url_for('static', filename= 'css/boxicons.min.css') }}"> 
 		<!-- Magnific Popup Min CSS --> 
-		<link rel="stylesheet" href="css/magnific-popup.min.css"> 
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.min.css') }}"> 
 		<!-- Flaticon CSS --> 
-		<link rel="stylesheet" href="css/flaticon.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
 		<!-- Meanmenu Min CSS -->
-		<link rel="stylesheet" href="css/meanmenu.min.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/meanmenu.min.css') }}">
 		<!-- Nice Select Min CSS -->
-		<link rel="stylesheet" href="css/nice-select.min.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.min.css') }}">
 		<!-- Odometer Min CSS-->
-		<link rel="stylesheet" href="css/odometer.min.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/odometer.min.css') }}">
 		<!-- Style CSS -->
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 		<!-- Responsive CSS -->
-		<link rel="stylesheet" href="css/responsive.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
 		
 		<!-- Favicon -->
-		<link rel="icon" type="image/png" href="img/favicon.png">
+		<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
 		<!-- Title -->
-		<title>Ezio - Transport & Logistics Company HTML Template</title>
+		<title>Eyop - Transport & Logistics Company</title>
     </head>
 
     <body>
@@ -56,15 +56,15 @@
 							<ul class="header-left-content">
 								<li>
 									<i class="bx bx-home"></i>
-									9170 Millbrook Rd, Newark, IL 60541
+									Lekki, Ikota GRA, Lagos State
 								</li>
 								<li>
 									<i class="bx bx-phone-call"></i>
-									<a href="tel:+1-(123)-456-7890">+1 (123) 456 7890</a>
+									<a href="tel:+234-906-142-3460">+234 906 142 3460</a>
 								</li>
 								<li>
 									<i class="bx bx-envelope"></i>
-									<a href="mailto:hello@ezio.com">hello@ezio.com</a>
+									<a href="mailto:info@eyoplogistics.com">info@eyoplogistics.com</a>
 								</li>
 							</ul>
 						</div>
@@ -74,32 +74,32 @@
 								<ul class="flag-area">
 									<li class="flag-item-top">
 										<a href="#" class="flag-bar">
-											<img src="img/flag/usa.png" alt="Image">
+											<img src="{{ url_for('static', filename='img/flag/usa.png') }}" alt="Image">
 											<span>USA</span>
 										</a>
 
 										<ul class="flag-item-bottom">
 											<li class="flag-item">
 												<a href="#" class="flag-link">
-													<img src="img/flag/canada.png" alt="Image">
+													<img src="{{ url_for('static', filename='img/flag/canada.png') }}" alt="Image">
 													Canada 
 												</a>
 											</li>
 											<li class="flag-item">
 												<a href="#" class="flag-link">
-													<img src="img/flag/australia.png" alt="Image">
+													<img src="{{ url_for('static', filename='img/flag/australia.png') }}" alt="Image">
 													Australia
 												</a>
 											</li>
 											<li class="flag-item">
 												<a href="#" class="flag-link">
-													<img src="img/flag/germany.png" alt="Image">
+													<img src="{{ url_for('static', filename='img/flag/germany.png') }}" alt="Image">
 													Germany
 												</a>
 											</li>
 											<li class="flag-item">
 												<a href="#" class="flag-link">
-													<img src="img/flag/argentina.png" alt="Image">
+													<img src="{{ url_for('static', filename='img/flag/argentina.png') }}" alt="Image">
 													Argentina
 												</a>
 											</li>
@@ -119,7 +119,7 @@
 					<div class="container">
 						<div class="mobile-menu">
 							<div class="logo">
-								<a href="index.html">
+								<a href="{{ url_for('home') }}">
 									<img src="img/logo.png" alt="logo">
 								</a>
 							</div>
@@ -130,7 +130,7 @@
 				<div class="desktop-nav">
 					<div class="container">
 						<nav class="navbar navbar-expand-md navbar-light">
-							<a class="navbar-brand" href="index.html">
+							<a class="navbar-brand" href="{{ url_for('home') }}">
 								<img src="img/logo.png" alt="logo">
 							</a>
 	
@@ -144,7 +144,7 @@
 			
 										<ul class="dropdown-menu">
 											<li class="nav-item">
-												<a href="index.html" class="nav-link">Home One</a>
+												<a href="{{ url_for('home') }}" class="nav-link">Home One</a>
 											</li>
 											<li class="nav-item">
 												<a href="index-2.html" class="nav-link">Home Two</a>
@@ -163,7 +163,7 @@
 			
 										<ul class="dropdown-menu">
 											<li class="nav-item">
-												<a href="about-us.html" class="nav-link">About Us</a>
+												<a href="{{ url_for('about') }}" class="nav-link">About Us</a>
 											</li>
 			
 											<li class="nav-item">
@@ -174,16 +174,16 @@
 			
 												<ul class="dropdown-menu">
 													<li class="nav-item">
-														<a href="pricing-style-one.html" class="nav-link">Pricing Style One</a>
+														<a href="{{ url_for('pricing') }}" class="nav-link">Pricing Style One</a>
 													</li>
 													<li class="nav-item">
-														<a href="pricing-style-two.html" class="nav-link">Pricing Style Two</a>
+														<a href="{{ url_for('get_quote') }}" class="nav-link">Pricing Style Two</a>
 													</li>
 												</ul>
 											</li>
 			
 											<li class="nav-item">
-												<a href="testimonials.html" class="nav-link">Testimonials</a>
+												<a href="{{ url_for('testimonials') }}" class="nav-link">Testimonials</a>
 											</li>
 			
 											<li class="nav-item">
@@ -194,22 +194,22 @@
 			
 												<ul class="dropdown-menu">
 													<li class="nav-item">
-														<a href="products.html" class="nav-link">Products</a>
+														<a href="{{ url_for('products') }}" class="nav-link">Products</a>
 													</li>
 													<li class="nav-item">
-														<a href="cart.html" class="nav-link">Cart</a>
+														<a href="{{ url_for('cart') }}" class="nav-link">Cart</a>
 													</li>
 													<li class="nav-item">
-														<a href="checkout.html" class="nav-link">Checkout</a>
+														<a href="{{ url_for('checkout') }}" class="nav-link">Checkout</a>
 													</li>
 													<li class="nav-item">
-														<a href="product-details.html" class="nav-link">Product Details</a>
+														<a href="{{ url_for('product_details') }}" class="nav-link">Product Details</a>
 													</li>
 												</ul>
 											</li>
 			
 											<li class="nav-item">
-												<a href="team.html" class="nav-link">Team</a>
+												<a href="{{ url_for('team') }}" class="nav-link">Team</a>
 											</li>
 			
 											<li class="nav-item">
@@ -220,37 +220,37 @@
 			
 												<ul class="dropdown-menu">
 													<li class="nav-item">
-														<a href="my-account.html" class="nav-link">My Account</a>
+														<a href="{{ url_for('my_account') }}" class="nav-link">My Account</a>
 													</li>
 													<li class="nav-item">
-														<a href="log-in.html" class="nav-link">Log In</a>
+														<a href="{{ url_for('login') }}" class="nav-link">Log In</a>
 													</li>
 													<li class="nav-item">
-														<a href="register.html" class="nav-link">Register</a>
+														<a href="{{ url_for('register') }}" class="nav-link">Register</a>
 													</li>
 													<li class="nav-item">
-														<a href="recover-password.html" class="nav-link">Recover Password</a>
+														<a href="{{ url_for('recover_password') }}" class="nav-link">Recover Password</a>
 													</li>
 												</ul>
 											</li>
 			
 											<li class="nav-item">
-												<a href="global-location.html" class="nav-link">Global Location</a>
+												<a href="{{ url_for('global_location') }}" class="nav-link">Global Location</a>
 											</li>
 											<li class="nav-item">
-												<a href="faq.html" class="nav-link">FAQ</a>
+												<a href="{{ url_for('faq') }}" class="nav-link">FAQ</a>
 											</li>
 											<li class="nav-item">
-												<a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
+												<a href="{{ url_for('privacy_policy') }}" class="nav-link">Privacy Policy</a>
 											</li>
 											<li class="nav-item">
-												<a href="terms-conditions.html" class="nav-link">Terms & Conditions</a>
+												<a href="{{ url_for('terms_and_conditions') }}" class="nav-link">Terms & Conditions</a>
 											</li>
 											<li class="nav-item">
-												<a href="coming-soon.html" class="nav-link">Coming Soon</a>
+												<a href="{{ url_for('coming_soon') }}" class="nav-link">Coming Soon</a>
 											</li>
 											<li class="nav-item">
-												<a href="404.html" class="nav-link">404 Error Page</a>
+												<a href="{{ url_for('error_404') }}" class="nav-link">404 Error Page</a>
 											</li>
 										</ul>
 									</li>
@@ -263,7 +263,7 @@
 			
 										<ul class="dropdown-menu">
 											<li class="nav-item">
-												<a href="services-style-one.html" class="nav-link">Services Style One</a>
+												<a href="{{ url_for('services') }}" class="nav-link">Services Style One</a>
 											</li>
 											<li class="nav-item">
 												<a href="services-style-two.html" class="nav-link active">Services Style Two</a>
@@ -272,7 +272,7 @@
 												<a href="services-style-three.html" class="nav-link">Services Style Three</a>
 											</li>
 											<li class="nav-item">
-												<a href="services-details.html" class="nav-link">Service Details</a>
+												<a href="{{ url_for('service_details') }}" class="nav-link">Service Details</a>
 											</li>
 										</ul>
 									</li>
@@ -285,7 +285,7 @@
 			
 										<ul class="dropdown-menu">
 											<li class="nav-item">
-												<a href="blog-column-one.html" class="nav-link">Blog Column One</a>
+												<a href="{{ url_for('blog') }}" class="nav-link">Blog Column One</a>
 											</li>
 											<li class="nav-item">
 												<a href="blog-column-two.html" class="nav-link">Blog Column Two</a>
@@ -297,22 +297,22 @@
 												<a href="blog-left-sidebar.html" class="nav-link">Blog Left Sidebar</a>
 											</li>
 											<li class="nav-item">
-												<a href="blog-details.html" class="nav-link">Blog Details</a>
+												<a href="{{ url_for('blog_post') }}" class="nav-link">Blog Details</a>
 											</li>
 										</ul>
 									</li>
 			
 									<li class="nav-item">
-										<a href="company.html" class="nav-link">Company</a>
+										<a href="{{ url_for('company') }}" class="nav-link">Company</a>
 									</li>
 									<li class="nav-item">
-										<a href="contact-us.html" class="nav-link">Contact Us</a>
+										<a href="{{ url_for('contact_us') }}" class="nav-link">Contact Us</a>
 									</li>
 								</ul>
 								
 								<div class="others-option">
 									<div class="get-quote">
-										<a href="pricing-style-two.html" class="default-btn">
+										<a href="{{ url_for('get_quote') }}" class="default-btn">
 											<span>Get A Quote</span>
 										</a>
 									</div>
@@ -336,7 +336,7 @@
 							<div class="option-inner">
 								<div class="others-option justify-content-center d-flex align-items-center">
 									<div class="get-quote">
-										<a href="pricing-style-two.html" class="default-btn">
+										<a href="{{ url_for('get_quote') }}" class="default-btn">
 											<span>Get A Quote</span>
 										</a>
 									</div>
@@ -357,7 +357,7 @@
 					<h2>Services Style Two</h2>
 					<ul>
 						<li>
-							<a href="index.html">
+							<a href="{{ url_for('home') }}">
 								Home 
 							</a>
 						</li>
@@ -380,17 +380,17 @@
 				<div class="row">
 					<div class="col-lg-4 col-sm-6">
 						<div class="single-services-box">
-							<a href="services-details.html" class="services-img">
+							<a href="{{ url_for('service_details') }}" class="services-img">
 								<img src="img/services/services-1.jpg" alt="Image">
 							</a>
 
 							<div class="services-content">
 								<h3>
-									<a href="services-details.html">Road Transport</a>
+									<a href="{{ url_for('service_details') }}">Road Transport</a>
 								</h3>
 								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nostrum minima eligendi neque labore asperiores.</p>
 
-								<a href="services-details.html" class="read-more">
+								<a href="{{ url_for('service_details') }}" class="read-more">
 									Read More
 								</a>
 							</div>
@@ -399,17 +399,17 @@
 
 					<div class="col-lg-4 col-sm-6">
 						<div class="single-services-box">
-							<a href="services-details.html" class="services-img">
+							<a href="{{ url_for('service_details') }}" class="services-img">
 								<img src="img/services/services-2.jpg" alt="Image">
 							</a>
 
 							<div class="services-content">
 								<h3>
-									<a href="services-details.html">Sea Transport</a>
+									<a href="{{ url_for('service_details') }}">Sea Transport</a>
 								</h3>
 								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nostrum minima eligendi neque labore asperiores.</p>
 
-								<a href="services-details.html" class="read-more">
+								<a href="{{ url_for('service_details') }}" class="read-more">
 									Read More
 								</a>
 							</div>
@@ -418,17 +418,17 @@
 
 					<div class="col-lg-4 col-sm-6">
 						<div class="single-services-box">
-							<a href="services-details.html" class="services-img">
+							<a href="{{ url_for('service_details') }}" class="services-img">
 								<img src="img/services/services-3.jpg" alt="Image">
 							</a>
 
 							<div class="services-content">
 								<h3>
-									<a href="services-details.html">Air Transport</a>
+									<a href="{{ url_for('service_details') }}">Air Transport</a>
 								</h3>
 								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nostrum minima eligendi neque labore asperiores.</p>
 
-								<a href="services-details.html" class="read-more">
+								<a href="{{ url_for('service_details') }}" class="read-more">
 									Read More
 								</a>
 							</div>
@@ -437,17 +437,17 @@
 					
 					<div class="col-lg-4 col-sm-6">
 						<div class="single-services-box">
-							<a href="services-details.html" class="services-img">
+							<a href="{{ url_for('service_details') }}" class="services-img">
 								<img src="img/services/services-4.jpg" alt="Image">
 							</a>
 
 							<div class="services-content">
 								<h3>
-									<a href="services-details.html">Packaging</a>
+									<a href="{{ url_for('service_details') }}">Packaging</a>
 								</h3>
 								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nostrum minima eligendi neque labore asperiores.</p>
 
-								<a href="services-details.html" class="read-more">
+								<a href="{{ url_for('service_details') }}" class="read-more">
 									Read More
 								</a>
 							</div>
@@ -456,17 +456,17 @@
 
 					<div class="col-lg-4 col-sm-6">
 						<div class="single-services-box">
-							<a href="services-details.html" class="services-img">
+							<a href="{{ url_for('service_details') }}" class="services-img">
 								<img src="img/services/services-5.jpg" alt="Image">
 							</a>
 
 							<div class="services-content">
 								<h3>
-									<a href="services-details.html">Home Delivery</a>
+									<a href="{{ url_for('service_details') }}">Home Delivery</a>
 								</h3>
 								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nostrum minima eligendi neque labore asperiores.</p>
 
-								<a href="services-details.html" class="read-more">
+								<a href="{{ url_for('service_details') }}" class="read-more">
 									Read More
 								</a>
 							</div>
@@ -475,17 +475,17 @@
 
 					<div class="col-lg-4 col-sm-6">
 						<div class="single-services-box">
-							<a href="services-details.html" class="services-img">
+							<a href="{{ url_for('service_details') }}" class="services-img">
 								<img src="img/services/services-6.jpg" alt="Image">
 							</a>
 
 							<div class="services-content">
 								<h3>
-									<a href="services-details.html">Fast Freight</a>
+									<a href="{{ url_for('service_details') }}">Fast Freight</a>
 								</h3>
 								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nostrum minima eligendi neque labore asperiores.</p>
 
-								<a href="services-details.html" class="read-more">
+								<a href="{{ url_for('service_details') }}" class="read-more">
 									Read More
 								</a>
 							</div>
@@ -502,7 +502,7 @@
 				<div class="row">
 					<div class="col-lg-3 col-md-6">
 						<div class="single-footer-widget">
-							<a href="index.html" class="logo">
+							<a href="{{ url_for('home') }}" class="logo">
 								<img src="img/logo.png" alt="Image">
 							</a>
 
@@ -566,22 +566,22 @@
 
 							<ul class="import-link">
 								<li>
-									<a href="about-us.html">About Us</a>
+									<a href="{{ url_for('about') }}">About Us</a>
 								</li>
 								<li>
-									<a href="team.html">Team</a>
+									<a href="{{ url_for('team') }}">Team</a>
 								</li>
 								<li>
-									<a href="faq.html">FAQ</a>
+									<a href="{{ url_for('faq') }}">FAQ</a>
 								</li>
 								<li>
-									<a href="blog-column-one.html">Blog</a>
+									<a href="{{ url_for('blog') }}">Blog</a>
 								</li>
 								<li>
-									<a href="privacy-policy.html">Privacy Policy</a>
+									<a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
 								</li>
 								<li>
-									<a href="terms-conditions.html">Terms And Conditions</a>
+									<a href="{{ url_for('terms_and_conditions') }}">Terms And Conditions</a>
 								</li>
 							</ul>
 						</div>
@@ -594,16 +594,16 @@
 							<ul class="address">
 								<li class="location">
 									<i class="bx bxs-location-plus"></i>
-									9170 Millbrook Rd, Newark, IL 60541 
+									Lekki, Ikota GRA, Lagos State 
 								</li>
 								<li>
 									<i class="bx bxs-envelope"></i>
-									<a href="mailto:hello@ezio.com">hello@ezio.com</a>
+									<a href="mailto:info@eyoplogistics.com">info@eyoplogistics.com</a>
 									<a href="mailto:info@ezio.com">info@ezio.com</a>
 								</li>
 								<li>
 									<i class="bx bxs-phone-call"></i>
-									<a href="tel:+1-(123)-456-7890">+1 (123) 456 7890</a>
+									<a href="tel:+234-906-142-3460">+234 906 142 3460</a>
 									<a href="tel:+1-(514)-312-6678">+1 (514) 312-6678</a>
 								</li>
 							</ul>
@@ -634,34 +634,34 @@
 		
 
         <!-- Jquery Min JS -->
-        <script src="js/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
         <!-- Bootstrap Bundle Min JS -->
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
         <!-- Meanmenu Min JS -->
-		<script src="js/meanmenu.min.js"></script>
+		<script src="{{ url_for('static', filename='js/meanmenu.min.js') }}"></script>
         <!-- Wow Min JS -->
-        <script src="js/wow.min.js"></script>
+        <script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
         <!-- Owl Carousel Min JS -->
-		<script src="js/owl.carousel.min.js"></script>
+		<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
         <!-- Nice Select Min JS -->
-		<script src="js/nice-select.min.js"></script>
+		<script src="{{ url_for('static', filename='js/nice-select.min.js') }}"></script>
         <!-- Magnific Popup Min JS -->
-		<script src="js/magnific-popup.min.js"></script>
+		<script src="{{ url_for('static', filename='js/magnific-popup.min.js') }}"></script>
 		<!-- Jarallax Min JS --> 
-		<script src="js/jarallax.min.js"></script>
+		<script src="{{ url_for('static', filename='js/jarallax.min.js') }}"></script>
 		<!-- Appear Min JS --> 
-        <script src="js/appear.min.js"></script>
+        <script src="{{ url_for('static', filename='js/appear.min.js') }}"></script>
 		<!-- Odometer Min JS --> 
-		<script src="js/odometer.min.js"></script>
+		<script src="{{ url_for('static', filename='js/odometer.min.js') }}"></script>
 		<!-- Smoothscroll Min JS --> 
-		<script src="js/smoothscroll.min.js"></script>
+		<script src="{{ url_for('static', filename='js/smoothscroll.min.js') }}"></script>
 		<!-- Form Validator Min JS -->
-		<script src="js/form-validator.min.js"></script>
+		<script src="{{ url_for('static', filename='js/form-validator.min.js') }}"></script>
 		<!-- Contact JS -->
-		<script src="js/contact-form-script.js"></script>
+		<script src="{{ url_for('static', filename='js/contact-form-script.js') }}"></script>
 		<!-- Ajaxchimp Min JS -->
-		<script src="js/ajaxchimp.min.js"></script>
+		<script src="{{ url_for('static', filename='js/ajaxchimp.min.js') }}"></script>
         <!-- Custom JS -->
-		<script src="js/custom.js"></script>
+		<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
     </body>
 </html>

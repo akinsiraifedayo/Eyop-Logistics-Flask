@@ -86,13 +86,127 @@ def admins_only(func):
     return decorated_func
 
 @app.route('/')
-def get_all_posts():
-    posts = BlogPost.query.all()
-    return render_template("index.html", all_posts=posts)
+def home():
+    return render_template("index.html")
+
+@app.route('/about')
+def about():
+    return render_template("about-us.html")
+
+@app.route('/pricing')
+def pricing():
+    return render_template("pricing-style-one.html")
+
+@app.route('/testimonials')
+def testimonials():
+    return render_template("testimonials.html")
+
+@app.route('/products')
+def products():
+    return render_template("products.html")
+
+@app.route('/cart')
+def cart():
+    return render_template("cart.html")
+
+@app.route('/checkout')
+def checkout():
+    return render_template("checkout.html")
+
+@app.route('/product-details')
+def product_details():
+    return render_template("product-details.html")
+
+@app.route('/team')
+def team():
+    return render_template("team.html")
+
+@app.route('/my-account')
+def my_account():
+    return render_template("my-account.html")
+
+
+
+@app.route('/login')
+def login():
+    return render_template("log-in.html")
+
+@app.route('/register')
+def register():
+    return render_template("register.html")
+
+@app.route('/recover-password')
+def recover_password():
+    return render_template("recover-password.html")
+
+@app.route('/global-location')
+def global_location():
+    return render_template("global-location.html")
+
+@app.route('/faq')
+def faq():
+    return render_template("faq.html")
+
+@app.route('/privacy-policy')
+def privacy_policy():
+    return render_template("privacy-policy.html")
+
+@app.route('/terms-and-conditions')
+def terms_and_conditions():
+    return render_template("terms-conditions.html")
+
+@app.route('/coming-soon')
+def coming_soon():
+    return render_template("coming-soon.html")
+
+@app.route('/404')
+def error_404():
+    return render_template("404.html")
+
+@app.route('/services')
+def services():
+    return render_template("services-style-one.html")
+
+@app.route('/service-details')
+def service_details():
+    return render_template("services-details.html")
+
+@app.route('/blog')
+def blog():
+    return render_template("blog-column-one.html")
+
+@app.route('/blog-post')
+def blog_post():
+    return render_template("blog-details.html")
+
+@app.route('/company')
+def company():
+    return render_template("company.html")
+
+@app.route('/contact')
+def contact_us():
+    return render_template("contact-us.html")
+
+@app.route('/get-quote')
+def get_quote():
+    return render_template("pricing-style-two.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @app.route('/register', methods=["POST", "GET"])
-def register():
+def registerz():
     form = RegisterForm()
     if request.method == "POST":
         pwd = form.password.data
@@ -116,7 +230,7 @@ def register():
 
 
 @app.route('/login', methods=["POST", "GET"])
-def login():
+def loginz():
     form = LoginForm()
     print("here")
     if request.method == "POST":
@@ -139,13 +253,13 @@ def login():
 
 @app.route('/logout')
 @login_required
-def logout():
+def logoutz():
     logout_user()
     return redirect(url_for('get_all_posts'))
 
 
 @app.route("/post/<int:post_id>", methods=["POST", "GET"])
-def show_post(post_id):
+def show_postz(post_id):
     requested_post = db.session.query(BlogPost).get(post_id)
     comments =  db.session.query(Comment).filter_by(blog_id=post_id)
     form = CommentForm()
@@ -166,17 +280,17 @@ def show_post(post_id):
 
 
 @app.route("/about")
-def about():
+def aboutz():
     return render_template("about.html")
 
 
 @app.route("/contact")
-def contact():
+def contactz():
     return render_template("contact.html")
 
 
 @app.route("/new-post", methods=["POST", "GET"])
-def add_new_post():
+def add_new_postz():
     form = CreatePostForm()
     if form.validate_on_submit():
         new_post = BlogPost(
@@ -195,7 +309,7 @@ def add_new_post():
 
 @app.route("/edit-post/<int:post_id>", methods=["POST", "GET"])
 @admins_only
-def edit_post(post_id):
+def edit_postz(post_id):
     post = BlogPost.query.get(post_id)
     edit_form = CreatePostForm(
         title=post.title,
@@ -218,7 +332,7 @@ def edit_post(post_id):
 
 @app.route("/delete/<int:post_id>")
 @admins_only
-def delete_post(post_id):
+def delete_postz(post_id):
     post_to_delete = BlogPost.query.get(post_id)
     db.session.delete(post_to_delete)
     db.session.commit()
