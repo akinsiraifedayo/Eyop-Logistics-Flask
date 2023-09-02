@@ -15,7 +15,7 @@ def process_html_file(file_path):
 
     # Save the modified content back to the file
     with open(file_path, 'w', encoding='utf-8') as file:
-        file.write(soup.prettify)
+        file.write(soup.prettify())
 
 # Specify the directory containing your HTML files
 directory_path = 'C:\\Users\\USER\\Videos\\Code\\All_Personal_Jobs\\Eyop Logistics Flask\\templates'

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<html lang="zxx">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<!-- Bootstrap Min CSS -->
+<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"/>
+<!-- Owl Theme Default Min CSS -->
+<link href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}" rel="stylesheet"/>
+<!-- Owl Carousel Min CSS -->
+<link href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" rel="stylesheet"/>
+<!-- Animate Min CSS -->
+<link href="{{ url_for('static', filename='css/animate.min.css') }}" rel="stylesheet"/>
+<!-- Boxicons Min CSS -->
+<link href="{{ url_for('static', filename= 'css/boxicons.min.css') }}" rel="stylesheet"/>
+<!-- Magnific Popup Min CSS -->
+<link href="{{ url_for('static', filename='css/magnific-popup.min.css') }}" rel="stylesheet"/>
+<!-- Flaticon CSS -->
+<link href="{{ url_for('static', filename='css/flaticon.css') }}" rel="stylesheet"/>
+<!-- Meanmenu Min CSS -->
+<link href="{{ url_for('static', filename='css/meanmenu.min.css') }}" rel="stylesheet"/>
+<!-- Nice Select Min CSS -->
+<link href="{{ url_for('static', filename='css/nice-select.min.css') }}" rel="stylesheet"/>
+<!-- Odometer Min CSS-->
+<link href="{{ url_for('static', filename='css/odometer.min.css') }}" rel="stylesheet"/>
+<!-- Style CSS -->
+<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"/>
+<!-- Responsive CSS -->
+<link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet"/>
+<!-- Favicon -->
+<link href="{{ url_for('static', filename='img/favicon.png') }}" rel="icon" type="image/png"/>
+<!-- Title -->
+<title>Eyop - Transport &amp; Logistics Company</title>
+</head>
+<body>
+<!-- Start Preloader Area -->
+<div class="preloader">
+<div class="lds-ripple">
+<div></div>
+<div></div>
+</div>
+</div>
+<!-- End Preloader Area -->
+<!-- Start Header Area -->
+<header class="header-area">
+<!-- Start Top Header -->
+<div class="top-header">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-lg-8 col-md-10">
+<ul class="header-left-content">
+<li>
+<i class="bx bx-home"></i>
+									Lekki, Ikota GRA, Lagos State
+								</li>
+<li>
+<i class="bx bx-phone-call"></i>
+<a href="tel:+234-906-142-3460">+234 906 142 3460</a>
+</li>
+<li>
+<i class="bx bx-envelope"></i>
+<a href="mailto:info@eyoplogistics.com">info@eyoplogistics.com</a>
+</li>
+</ul>
+</div>
+<div class="col-lg-4 col-md-2">
+<div class="header-right-content">
+<ul class="flag-area">
+<li class="flag-item-top">
+<a class="flag-bar" href="#">
+<img alt="Image" src="{{ url_for('static', filename='img/flag/usa.png') }}"/>
+<span>USA</span>
+</a>
+<ul class="flag-item-bottom">
+<li class="flag-item">
+<a class="flag-link" href="#">
+<img alt="Image" src="{{ url_for('static', filename='img/flag/canada.png') }}"/>
+													Canada 
+												</a>
+</li>
+<li class="flag-item">
+<a class="flag-link" href="#">
+<img alt="Image" src="{{ url_for('static', filename='img/flag/australia.png') }}"/>
+													Australia
+												</a>
+</li>
+<li class="flag-item">
+<a class="flag-link" href="#">
+<img alt="Image" src="{{ url_for('static', filename='img/flag/germany.png') }}"/>
+													Germany
+												</a>
+</li>
+<li class="flag-item">
+<a class="flag-link" href="#">
+<img alt="Image" src="{{ url_for('static', filename='img/flag/argentina.png') }}"/>
+													Argentina
+												</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Start Top Header -->
+<!-- Start Navbar Area -->
+<div class="navbar-area">
+<div class="mobile-nav">
+<div class="container">
+<div class="mobile-menu">
+<div class="logo">
+<a href="{{ url_for('home') }}">
+<img alt="logo" src="{{ url_for('static', filename='img/logo.png') }}"/>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="desktop-nav">
+<div class="container">
+<nav class="navbar navbar-expand-md navbar-light">
+<a class="navbar-brand" href="{{ url_for('home') }}">
+<img alt="logo" src="{{ url_for('static', filename='img/logo.png') }}"/>
+</a>
+<div class="collapse navbar-collapse mean-menu">
+<ul class="navbar-nav m-auto">
+<li class="nav-item">
+<a class="nav-link" href="#">
+											Home
+											<i class="bx bx-chevron-down"></i>
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('home') }}">Home One</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index-2.html">Home Two</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index-3.html">Home Three</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">
+											Pages
+											<i class="bx bx-chevron-down"></i>
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('about') }}">About Us</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">
+													Pricing
+													<i class="bx bx-chevron-right"></i>
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('pricing') }}">Pricing Style One</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('get_quote') }}">Pricing Style Two</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('testimonials') }}">Testimonials</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">
+													Shop
+													<i class="bx bx-chevron-right"></i>
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('products') }}">Products</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('cart') }}">Cart</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('checkout') }}">Checkout</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('product_details') }}">Product Details</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('team') }}">Team</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">
+													User
+													<i class="bx bx-chevron-right"></i>
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('my_account') }}">My Account</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('login') }}">Log In</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('register') }}">Register</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('recover_password') }}">Recover Password</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('global_location') }}">Global Location</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('faq') }}">FAQ</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('terms_and_conditions') }}">Terms &amp; Conditions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('coming_soon') }}">Coming Soon</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('error_404') }}">404 Error Page</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">
+											Services
+											<i class="bx bx-chevron-down"></i>
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('services') }}">Services Style One</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="services-style-two.html">Services Style Two</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="services-style-three.html">Services Style Three</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('service_details') }}">Service Details</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link active" href="#">
+											Blog
+											<i class="bx bx-chevron-down"></i>
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('blog') }}">Blog Column One</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="blog-column-two.html">Blog Column Two</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="blog-column-three.html">Blog Column Three</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="blog-left-sidebar.html">Blog Left Sidebar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link active" href="{{ url_for('blog_post') }}">Blog Details</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('company') }}">Company</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('contact_us') }}">Contact Us</a>
+</li>
+</ul>
+<div class="others-option">
+<div class="get-quote">
+<a class="default-btn" href="{{ url_for('get_quote') }}">
+<span>Get A Quote</span>
+</a>
+</div>
+</div>
+</div>
+</nav>
+</div>
+</div>
+<div class="others-option-for-responsive">
+<div class="container">
+<div class="dot-menu">
+<div class="inner">
+<div class="circle circle-one"></div>
+<div class="circle circle-two"></div>
+<div class="circle circle-three"></div>
+</div>
+</div>
+<div class="container">
+<div class="option-inner">
+<div class="others-option justify-content-center d-flex align-items-center">
+<div class="get-quote">
+<a class="default-btn" href="{{ url_for('get_quote') }}">
+<span>Get A Quote</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End Navbar Area -->
+</header>
+<!-- End Header Area -->
+<!-- Start Page Title Area -->
+<div class="page-title-area bg-23">
+<div class="container">
+<div class="page-title-content">
+<h2>Blog Details</h2>
+<ul>
+<li>
+<a href="{{ url_for('home') }}">
+								Home 
+							</a>
+</li>
+<li class="active">Blog Details</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- End Page Title Area -->
+<!-- Start Blog Details Area -->
+<div class="blog-details-area ptb-100">
+<div class="container">
+<div class="row">
+<div class="col-lg-8">
+<div class="blog-details-content">
+<div class="blog-details-img">
+<img alt="Image" src='{{ url_for("static", filename="img/blog-details/blog-details-1.jpg") }}'/>
+</div>
+<div class="blog-top-content">
+<div class="news-content">
+<ul class="admin">
+<li>
+<a href="#">
+<i class="bx bx-user-circle"></i>
+												Posted by: Carl Bradshaw
+											</a>
+</li>
+<li>
+<a href="#">
+<i class="bx bx-comment"></i>
+												No comments
+											</a>
+</li>
+<li class="float">
+<i class="bx bx-calendar-alt"></i>
+											October 20, 2020
+										</li>
+</ul>
+<h3>Marketing Policy Added To The Logistic Service</h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo.</p>
+<p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas auguae, eu vulputate magna eros eu Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
+</div>
+<blockquote>
+<p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore dolore magna aliqua.”</p>
+<i class="bx bxs-quote-alt-left"></i>
+</blockquote>
+<div class="news-content-2">
+<p>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi nulla quis nibh. Quisque a lectus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. malesuada erat ut turpis. Suspendisse urna nibh, viverra non semper suscipit</p>
+</div>
+<div class="row">
+<div class="col-lg-6 col-md-6">
+<div class="single-blog-post-img">
+<a href="{{ url_for('blog_post') }}">
+<img alt="Image" src='{{ url_for("static", filename="img/blog-details/blog-1.jpg") }}'/>
+</a>
+</div>
+</div>
+<div class="col-lg-6 col-md-6">
+<div class="single-blog-post-img">
+<a href="{{ url_for('blog_post') }}">
+<img alt="Image" src='{{ url_for("static", filename="img/blog-details/blog-2.jpg") }}'/>
+</a>
+</div>
+</div>
+</div>
+<div class="news-content-3">
+<p>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi nulla quis nibh. Quisque a lectus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. malesuada erat ut turpis. Suspendisse urna nibh, viverra non semper suscipit.</p>
+</div>
+</div>
+<div class="comments">
+<h3>Comments (2)</h3>
+<ul>
+<li>
+<img alt="Image" src='{{ url_for("static", filename="img/blog-details/comments-1.jpg") }}'/>
+<h3>Juanita Jones</h3>
+<span>Monday, October 20, 2020</span>
+<p>Lorem ipsum dolora sit amet, consectetur adipiscing elit sed do eiusmod tempor incdidunt labore et dolore magna aliqua. Veniam quis nostrud exercitation ullaco</p>
+<a href="#">
+											Reply
+										</a>
+</li>
+<li>
+<img alt="Image" src='{{ url_for("static", filename="img/blog-details/comments-2.jpg") }}'/>
+<h3>Ward F. Nelson</h3>
+<span>Monday, October 20, 2020</span>
+<p>Lorem ipsum dolora sit amet, consectetur adipiscing elit sed do eiusmod tempor incdidunt labore et dolore magna aliqua. Veniam quis nostrud exercitation ullaco</p>
+<a href="#">
+											Reply
+										</a>
+</li>
+</ul>
+</div>
+<div class="leave-reply">
+<h3>Leave A Reply</h3>
+<p>Your email address will not be published. Required fields are marked<span class="star">*</span></p>
+<form>
+<div class="row">
+<div class="col-lg-6 col-sm-6">
+<div class="form-group">
+<label>Name<span class="star">*</span></label>
+<input class="form-control" id="name" name="name" type="text"/>
+</div>
+</div>
+<div class="col-lg-6 col-sm-6">
+<div class="form-group">
+<label>Email address<span class="star">*</span></label>
+<input class="form-control" id="email" name="email" type="email"/>
+</div>
+</div>
+<div class="col-lg-12">
+<div class="form-group">
+<label>Your website</label>
+<input class="form-control" id="your-website-link" name="your-website-link" type="text"/>
+</div>
+</div>
+<div class="col-lg-12 col-md-12">
+<div class="form-group">
+<label>Comment</label>
+<textarea class="form-control" id="message" name="message" rows="8"></textarea>
+</div>
+</div>
+<div class="col-12">
+<div class="form-group">
+<input id="chb2" type="checkbox"/>
+<span>
+													Save my name, email, and website in this browser for the next time I comment.
+												</span>
+</div>
+</div>
+<div class="col-lg-12 col-md-12">
+<button class="default-btn page-btn" type="submit">
+<span>Post A Comment</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="widget-sidebar">
+<div class="sidebar-widget search">
+<form class="search-form">
+<input class="form-control" name="search" placeholder="Search here" type="text"/>
+<button class="search-button" type="submit">
+<i class="bx bx-search"></i>
+</button>
+</form>
+</div>
+<div class="sidebar-widget recent-post">
+<h3 class="widget-title">Recent Post</h3>
+<ul>
+<li>
+<a href="{{ url_for('blog_post') }}">
+											New Cargo Shipment Is Open On The Global Market
+											<img alt="Image" src='{{ url_for("static", filename="img/blog-details/recent-post-1.jpg") }}'/>
+</a>
+<span>October 19,2020</span>
+</li>
+<li>
+<a href="{{ url_for('blog_post') }}">
+											Marketing Policy Added To The Logistic Service
+											<img alt="Image" src='{{ url_for("static", filename="img/blog-details/recent-post-2.jpg") }}'/>
+</a>
+<span>October 18,2020</span>
+</li>
+<li>
+<a href="{{ url_for('blog_post') }}">
+											Marketing Policy Added To The Logistic Service
+											<img alt="Image" src='{{ url_for("static", filename="img/blog-details/recent-post-3.jpg") }}'/>
+</a>
+<span>October 09,2020</span>
+</li>
+</ul>
+</div>
+<div class="sidebar-widget categories">
+<h3>Categories</h3>
+<ul>
+<li>
+<a href="#">Road Transport <span>(05)</span></a>
+</li>
+<li>
+<a href="#">Sea Transport <span>(07)</span></a>
+</li>
+<li>
+<a href="#">Air Transport <span>(10)</span></a>
+</li>
+<li>
+<a href="#">Courier Service <span>(09)</span></a>
+</li>
+<li>
+<a href="#">Fast Freight <span>(12)</span></a>
+</li>
+<li>
+<a href="#">Home Delivery <span>(11)</span></a>
+</li>
+<li>
+<a href="#">Packaging <span>(03)</span></a>
+</li>
+</ul>
+</div>
+<div class="sidebar-widget categories">
+<h3>Archives</h3>
+<ul>
+<li>
+<a href="#">August <span>2020</span></a>
+</li>
+<li>
+<a href="#">June <span>2020</span></a>
+</li>
+<li>
+<a href="#">April <span>2020</span></a>
+</li>
+<li>
+<a href="#">January <span>2020</span></a>
+</li>
+<li>
+<a href="#">December <span>2020</span></a>
+</li>
+<li>
+<a href="#">November <span>2020</span></a>
+</li>
+</ul>
+</div>
+<div class="sidebar-widget tags mb-0">
+<h3>Tags</h3>
+<ul>
+<li>
+<a href="#">Road Transport</a>
+</li>
+<li>
+<a href="#">Sea Transport</a>
+</li>
+<li>
+<a href="#">Air Transport</a>
+</li>
+<li>
+<a href="#">Courier Service</a>
+</li>
+<li>
+<a href="#">Fast Freight</a>
+</li>
+<li>
+<a href="#">Home Delivery</a>
+</li>
+<li>
+<a href="#">Packaging</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End Blog Details Area -->
+<!-- Start Footer Area -->
+<footer class="footer-area pt-100 pb-70">
+<div class="container">
+<div class="row">
+<div class="col-lg-3 col-md-6">
+<div class="single-footer-widget">
+<a class="logo" href="{{ url_for('home') }}">
+<img alt="Image" src="{{ url_for('static', filename='img/logo.png') }}"/>
+</a>
+<p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consec.</p>
+<ul class="social-icon">
+<li>
+<a href="#">
+<i class="bx bxl-facebook"></i>
+</a>
+</li>
+<li>
+<a href="#">
+<i class="bx bxl-instagram"></i>
+</a>
+</li>
+<li>
+<a href="#">
+<i class="bx bxl-linkedin-square"></i>
+</a>
+</li>
+<li>
+<a href="#">
+<i class="bx bxl-twitter"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<div class="single-footer-widget">
+<h3>Services</h3>
+<ul class="import-link">
+<li>
+<a href="#">Sea Freight</a>
+</li>
+<li>
+<a href="#">Air Freight</a>
+</li>
+<li>
+<a href="#">Road Freight</a>
+</li>
+<li>
+<a href="#">Local Delivery</a>
+</li>
+<li>
+<a href="#">Bus Freight</a>
+</li>
+<li>
+<a href="#">Car Freight</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<div class="single-footer-widget">
+<h3>Company</h3>
+<ul class="import-link">
+<li>
+<a href="{{ url_for('about') }}">About Us</a>
+</li>
+<li>
+<a href="{{ url_for('team') }}">Team</a>
+</li>
+<li>
+<a href="{{ url_for('faq') }}">FAQ</a>
+</li>
+<li>
+<a href="{{ url_for('blog') }}">Blog</a>
+</li>
+<li>
+<a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+</li>
+<li>
+<a href="{{ url_for('terms_and_conditions') }}">Terms And Conditions</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+<div class="single-footer-widget">
+<h3>Address</h3>
+<ul class="address">
+<li class="location">
+<i class="bx bxs-location-plus"></i>
+									Lekki, Ikota GRA, Lagos State 
+								</li>
+<li>
+<i class="bx bxs-envelope"></i>
+<a href="mailto:info@eyoplogistics.com">info@eyoplogistics.com</a>
+<a href="mailto:info@eyoplogistics.com">info@eyoplogistics.com</a>
+</li>
+<li>
+<i class="bx bxs-phone-call"></i>
+<a href="tel:+234-906-142-3460">+234 906 142 3460</a>
+<a href="tel:+234-805-588-9183">+234 805 588 9183</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<!-- End Footer Area -->
+<!-- Start Copy Right Area -->
+<div class="copy-right-area">
+<div class="container">
+<p>
+					Copyright <i class="bx bx-copyright"></i><span id="currentYear"></span> Eyop. Designed By
+					<a href="https://ifedayo.crowlancer.com/" target="_blank">Olympicson</a>
+</p>
+</div>
+</div>
+<!-- End Copy Right Area -->
+<!-- Start Go Top Area -->
+<div class="go-top">
+<i class="bx bx-chevrons-up"></i>
+<i class="bx bx-chevrons-up"></i>
+</div>
+<!-- End Go Top Area -->
+<!-- Jquery Min JS -->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<!-- Bootstrap Bundle Min JS -->
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<!-- Meanmenu Min JS -->
+<script src="{{ url_for('static', filename='js/meanmenu.min.js') }}"></script>
+<!-- Wow Min JS -->
+<script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+<!-- Owl Carousel Min JS -->
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+<!-- Nice Select Min JS -->
+<script src="{{ url_for('static', filename='js/nice-select.min.js') }}"></script>
+<!-- Magnific Popup Min JS -->
+<script src="{{ url_for('static', filename='js/magnific-popup.min.js') }}"></script>
+<!-- Jarallax Min JS -->
+<script src="{{ url_for('static', filename='js/jarallax.min.js') }}"></script>
+<!-- Appear Min JS -->
+<script src="{{ url_for('static', filename='js/appear.min.js') }}"></script>
+<!-- Odometer Min JS -->
+<script src="{{ url_for('static', filename='js/odometer.min.js') }}"></script>
+<!-- Smoothscroll Min JS -->
+<script src="{{ url_for('static', filename='js/smoothscroll.min.js') }}"></script>
+<!-- Form Validator Min JS -->
+<script src="{{ url_for('static', filename='js/form-validator.min.js') }}"></script>
+<!-- Contact JS -->
+<script src="{{ url_for('static', filename='js/contact-form-script.js') }}"></script>
+<!-- Ajaxchimp Min JS -->
+<script src="{{ url_for('static', filename='js/ajaxchimp.min.js') }}"></script>
+<!-- Custom JS -->
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+</body>
+</html>
