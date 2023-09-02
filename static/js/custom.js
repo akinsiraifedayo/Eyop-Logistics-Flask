@@ -1,3 +1,8 @@
+var currentYear = new Date().getFullYear();
+
+// Find the element with the id "currentYear" and set its text content
+document.getElementById("currentYear").textContent = currentYear;
+
 (function($) {
 	'use strict';
 	// Mean Menu JS
