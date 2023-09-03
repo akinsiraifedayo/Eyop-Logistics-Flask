@@ -32,7 +32,7 @@
   <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="icon" type="image/png"/>
   <!-- Title -->
   <title>
-   Eyop - Transport &amp; Logistics Company
+   Eyop - Transport & Logistics Company
   </title>
  </head>
  <body>
@@ -122,294 +122,92 @@
    <!-- Start Navbar Area -->
    <div class="navbar-area">
     <div class="mobile-nav">
-     <div class="container">
-      <div class="mobile-menu">
-       <div class="logo">
-        <a href="{{ url_for('home') }}">
-         <img alt="logo" src="{{ url_for('static', filename='img/logo.png') }}"/>
-        </a>
-       </div>
-      </div>
-     </div>
+        <div class="container">
+            <div class="mobile-menu">
+                <div class="logo">
+                    <a href="{{ url_for('home') }}">
+                        <img class="logo-icon" alt="logo" src="{{ url_for('static', filename='img/logo.png') }}"/>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="desktop-nav">
-     <div class="container">
-      <nav class="navbar navbar-expand-md navbar-light">
-       <a class="navbar-brand" href="{{ url_for('home') }}">
-        <img alt="logo" src="{{ url_for('static', filename='img/logo.png') }}"/>
-       </a>
-       <div class="collapse navbar-collapse mean-menu">
-        <ul class="navbar-nav m-auto">
-         <li class="nav-item">
-          <a class="nav-link" href="#">
-           Home
-           <i class="bx bx-chevron-down">
-           </i>
-          </a>
-          <ul class="dropdown-menu">
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('home') }}">
-             Home One
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="index-2.html">
-             Home Two
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="index-3.html">
-             Home Three
-            </a>
-           </li>
-          </ul>
-         </li>
-         <li class="nav-item">
-          <a class="nav-link active" href="#">
-           Pages
-           <i class="bx bx-chevron-down">
-           </i>
-          </a>
-          <ul class="dropdown-menu">
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('about') }}">
-             About Us
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="#">
-             Pricing
-             <i class="bx bx-chevron-right">
-             </i>
-            </a>
-            <ul class="dropdown-menu">
-             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('pricing') }}">
-               Pricing Style One
-              </a>
-             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('get_quote') }}">
-               Pricing Style Two
-              </a>
-             </li>
-            </ul>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link active" href="{{ url_for('testimonials') }}">
-             Testimonials
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="#">
-             Shop
-             <i class="bx bx-chevron-right">
-             </i>
-            </a>
-            <ul class="dropdown-menu">
-             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('products') }}">
-               Products
-              </a>
-             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('cart') }}">
-               Cart
-              </a>
-             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('checkout') }}">
-               Checkout
-              </a>
-             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('product_details') }}">
-               Product Details
-              </a>
-             </li>
-            </ul>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('team') }}">
-             Team
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="#">
-             User
-             <i class="bx bx-chevron-right">
-             </i>
-            </a>
-            <ul class="dropdown-menu">
-             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('my_account') }}">
-               My Account
-              </a>
-             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('login') }}">
-               Log In
-              </a>
-             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('register') }}">
-               Register
-              </a>
-             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('recover_password') }}">
-               Recover Password
-              </a>
-             </li>
-            </ul>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('global_location') }}">
-             Global Location
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('faq') }}">
-             FAQ
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('privacy_policy') }}">
-             Privacy Policy
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('terms_and_conditions') }}">
-             Terms &amp; Conditions
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('coming_soon') }}">
-             Coming Soon
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('error_404') }}">
-             404 Error Page
-            </a>
-           </li>
-          </ul>
-         </li>
-         <li class="nav-item">
-          <a class="nav-link" href="#">
-           Services
-           <i class="bx bx-chevron-down">
-           </i>
-          </a>
-          <ul class="dropdown-menu">
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('services') }}">
-             Services Style One
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="services-style-two.html">
-             Services Style Two
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="services-style-three.html">
-             Services Style Three
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('service_details') }}">
-             Service Details
-            </a>
-           </li>
-          </ul>
-         </li>
-         <li class="nav-item">
-          <a class="nav-link" href="#">
-           Blog
-           <i class="bx bx-chevron-down">
-           </i>
-          </a>
-          <ul class="dropdown-menu">
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('blog') }}">
-             Blog Column One
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="blog-column-two.html">
-             Blog Column Two
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="blog-column-three.html">
-             Blog Column Three
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="blog-left-sidebar.html">
-             Blog Left Sidebar
-            </a>
-           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('blog_post') }}">
-             Blog Details
-            </a>
-           </li>
-          </ul>
-         </li>
-         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('company') }}">
-           Company
-          </a>
-         </li>
-         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('contact_us') }}">
-           Contact Us
-          </a>
-         </li>
-        </ul>
-        <div class="others-option">
-         <div class="get-quote">
-          <a class="default-btn" href="{{ url_for('get_quote') }}">
-           <span>
-            Get A Quote
-           </span>
-          </a>
-         </div>
+        <div class="container">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <a class="navbar-brand" href="{{ url_for('home') }}">
+                    <img class="navbar-brand-icon" alt="logo" src="{{ url_for('static', filename='img/logo.png') }}"/>
+                </a>
+                <div class="collapse navbar-collapse mean-menu">
+                    <ul class="navbar-nav m-auto">
+                      
+                        {% for item in navigation_items %}
+                            {% if item.url_for %}
+                                <li class="nav-item">
+                                    <a class="nav-link {% if item.url_for == current_page %}active{% endif %}" href="{{ url_for(item.url_for) }}">
+                                        {{ item.label }}
+                                        {% if item.sub_items %}
+                                            <i class="bx bx-chevron-down"></i>
+                                        {% endif %}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link {% for subitem in item.sub_items %} {% if subitem.url_for == current_page %}active{% endif %}{% endfor %}" href="#">
+                                        {{ item.label }}
+                                        {% if item.sub_items %}
+                                            <i class="bx bx-chevron-down"></i>
+                                        {% endif %}
+                                    </a>
+                                    {% if item.sub_items %}
+                                        <ul class="dropdown-menu">
+                                            {% for sub_item in item.sub_items %}
+                                                <li class="nav-item ">
+                                                    <a class="nav-link {% if sub_item.url_for == current_page %}active{% endif %}" href="{{ url_for(sub_item.url_for) }}">
+                                                        {{ sub_item.label }}
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <div class="others-option">
+                      <div class="get-quote">
+                        <a class="default-btn" href="{{ url_for('get_quote') }}">
+                          <span> Get A Quote </span>
+                        </a>
+                      </div>
+                    </div>
+                </div>
+            </nav>
         </div>
-       </div>
-      </nav>
-     </div>
     </div>
     <div class="others-option-for-responsive">
-     <div class="container">
-      <div class="dot-menu">
-       <div class="inner">
-        <div class="circle circle-one">
+        <div class="container">
+            <div class="dot-menu">
+                <div class="inner">
+                    <div class="circle circle-one"></div>
+                    <div class="circle circle-two"></div>
+                    <div class="circle circle-three"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="option-inner">
+                    <div class="others-option justify-content-center d-flex align-items-center">
+                        <div class="get-quote">
+                            <a class="default-btn" href="{{ url_for('get_quote') }}">
+                                <span>Get A Quote</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="circle circle-two">
-        </div>
-        <div class="circle circle-three">
-        </div>
-       </div>
-      </div>
-      <div class="container">
-       <div class="option-inner">
-        <div class="others-option justify-content-center d-flex align-items-center">
-         <div class="get-quote">
-          <a class="default-btn" href="{{ url_for('get_quote') }}">
-           <span>
-            Get A Quote
-           </span>
-          </a>
-         </div>
-        </div>
-       </div>
-      </div>
-     </div>
     </div>
-   </div>
+</div>aaaaaaaaaaa
    <!-- End Navbar Area -->
   </header>
   <!-- End Header Area -->
