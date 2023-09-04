@@ -84,82 +84,10 @@
    </div>
   </section>
   <!-- End Contact Info Area -->
-  <!-- Start Contact Area -->
-  <section class="main-contact-area ptb-100">
-   <div class="container">
-    <div class="section-title">
-     <h2>
-      Drop Us A Message For Any Query
-     </h2>
-    </div>
-    <form id="contactForm">
-     <div class="row">
-      <div class="col-lg-6 col-sm-6">
-       <div class="form-group">
-        <input class="form-control" data-error="Please enter your name" id="name" name="name" placeholder="Your Name" required="" type="text"/>
-        <div class="help-block with-errors">
-        </div>
-       </div>
-      </div>
-      <div class="col-lg-6 col-sm-6">
-       <div class="form-group">
-        <input class="form-control" data-error="Please enter your email" id="email" name="email" placeholder="Your Email" required="" type="email"/>
-        <div class="help-block with-errors">
-        </div>
-       </div>
-      </div>
-      <div class="col-lg-6 col-sm-6">
-       <div class="form-group">
-        <input class="form-control" data-error="Please enter your number" id="phone_number" name="phone_number" placeholder="Your Phone" required="" type="text"/>
-        <div class="help-block with-errors">
-        </div>
-       </div>
-      </div>
-      <div class="col-lg-6 col-sm-6">
-       <div class="form-group">
-        <input class="form-control" data-error="Please enter your subject" id="msg_subject" name="msg_subject" placeholder="Your Subject" required="" type="text"/>
-        <div class="help-block with-errors">
-        </div>
-       </div>
-      </div>
-      <div class="col-lg-12 col-md-12">
-       <div class="form-group">
-        <textarea class="form-control" cols="30" data-error="Write your message" id="message" name="message" placeholder="Your Message" required="" rows="10"></textarea>
-        <div class="help-block with-errors">
-        </div>
-       </div>
-      </div>
-      <div class="col-12">
-       <div class="form-group checkboxs">
-        <input id="chb2" type="checkbox"/>
-        <p>
-         Accept
-         <a href="{{ url_for('terms_and_conditions') }}">
-          Terms & Conditions
-         </a>
-         And
-         <a href="{{ url_for('privacy_policy') }}">
-          Privacy Policy.
-         </a>
-        </p>
-       </div>
-      </div>
-      <div class="col-12">
-       <button class="default-btn btn-two" type="submit">
-        <span>
-         Send Message
-        </span>
-       </button>
-       <div class="h3 text-center hidden" id="msgSubmit">
-       </div>
-       <div class="clearfix">
-       </div>
-      </div>
-     </div>
-    </form>
-   </div>
-  </section>
-  <!-- End Contact Area -->
+  <!-- Start Contact Form Area -->
+  {% include "./reusables/contact-form-area.html" %}
+
+  <!-- End Contact Form Area -->
   <!-- Start Map Area -->
   <div class="map-area">
    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126866.60910675426!2d3.4550053042168893!3d6.447736437974536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf7c0e2ea09ed%3A0x413a9ffa227ea238!2sIKOTA%20GRA!5e0!3m2!1sen!2sng!4v1693815552788!5m2!1sen!2sng">

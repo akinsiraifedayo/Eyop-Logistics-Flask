@@ -10,9 +10,13 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 from functools import wraps
+from functions import navigation_items
+from flask_mail import Mail, Message
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'whatever-8BYkEfBA6O6donffddsssszWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.urandom(32).hex()
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
@@ -23,9 +27,18 @@ db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 gravatar=Gravatar(app)
 
+# Configure your email settings
+load_dotenv()
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Replace with your email server
+app.config['MAIL_PORT'] = 587  # Replace with the appropriate port
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = os.getenv('MY_EMAIL') # Replace with your email
+app.config['MAIL_PASSWORD'] = os.getenv('MY_PWD')  # Replace with your email password
+mail = Mail(app)
 
+print(os.getenv('MY_EMAIL'))
 ##CONFIGURE TABLES
-
 class User(db.Model, UserMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -52,6 +65,7 @@ class BlogPost(db.Model):
     body = db.Column(db.Text, nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
 
+
 class Comment(db.Model):
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
@@ -61,8 +75,13 @@ class Comment(db.Model):
     blog_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
     text = db.Column(db.Text, nullable=False)
 
-
-
+class ContactForm(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), nullable=False)
+    phone_number = db.Column(db.String(20), nullable=False)
+    msg_subject = db.Column(db.String(255), nullable=False)
+    message = db.Column(db.Text, nullable=False)
 
 with app.app_context():
     db.create_all()
@@ -73,7 +92,6 @@ with app.app_context():
 def load_user(user_id):
     return db.session.query(User).get(user_id)
 
-
 def admins_only(func):
     @wraps(func)
     def decorated_func(*args, **kwargs):
@@ -83,52 +101,18 @@ def admins_only(func):
             return abort(403)
     return decorated_func
 
-# In your Flask route function or context processor
-navigation_items = [
-    {"label": "Home", "url_for": "home", "sub_items": None},
-    {
-        "label": "Pages",
-        "url_for": None,  # No direct link for the parent item
-        "sub_items": [
-            {"label": "About Us", "url_for": "about"},
-            {"label": "Pricing", "url_for": "pricing"},
-            {"label": "Testimonials", "url_for": "testimonials"},
-            {"label": "Our Team", "url_for": "team"},
-            # Add more sub-items as needed
-        ],
-    },
-    {
-        "label": "Shop",
-        "url_for": None,  # No direct link for the parent item
-        "sub_items": [
-            {"label": "Products", "url_for": "products"},
-            {"label": "Cart", "url_for": "cart"},
-            {"label": "Checkout", "url_for": "checkout"},
-            {"label": "Product Details", "url_for": "product_details"},
-            {"label": "Global Location", "url_for": "global_location"},
-            {"label": "FAQ", "url_for": "faq"},
-            {"label": "Privacy Policy", "url_for": "privacy_policy"},
-            {"label": "Terms and Conditions", "url_for": "terms_and_conditions"},
-            # Add more sub-items as needed
-        ],
-    },
-    {"label": "Services", "url_for": "services", "sub_items": None},
-    {"label": "Blog", "url_for": "blog", "sub_items": None},
-    {"label": "Company", "url_for": "company", "sub_items": None},
-    {"label": "Contact Us", "url_for": "contact_us", "sub_items": None},
-    {
-        "label": "User",
-        "url_for": None,  # No direct link for the parent item
-        "sub_items": [
-            {"label": "My Account", "url_for": "my_account"},
-            {"label": "Log In", "url_for": "login"},
-            {"label": "Register", "url_for": "register"},
-            {"label": "Forgot Password", "url_for": "recover_password"},
-            # Add more sub-items as needed
-        ],
-    },
-    # Add more navigation items as needed
-]
+def isValidEmail(email):
+    # Basic email validation example (customize as needed)
+    import re
+    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(email_pattern, email)
+
+def send_email(name, email, msg_subject, message):
+    msg = Message('New Contact Form Submission', sender='your_email@example.com', recipients=['your_email@example.com'])
+    msg.body = f"Name: {name}\nEmail: {email}\nSubject: {msg_subject}\nMessage: {message}"
+    msg.reply_to = 'your_email@example.com'
+    mail.send(msg)
+
 @app.context_processor
 def inject_current_page():
     current_page = request.endpoint
@@ -136,11 +120,6 @@ def inject_current_page():
 
 
 
-def isValidEmail(email):
-    # Basic email validation example (customize as needed)
-    import re
-    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-    return re.match(email_pattern, email)
 
 @app.route('/coming-soonest', methods=["POST", "GET"])
 def coming_soonest():
@@ -165,9 +144,44 @@ def coming_soonest():
 def home():
     return render_template("index.html")
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
+@app.route('/login')
+def login():
+    return render_template("log-in.html")
+
+@app.route('/register')
+def register():
+    return render_template("register.html")
+
+@app.route('/recover-password')
+def recover_password():
+    return render_template("recover-password.html")
+
+@app.route('/faq')
+def faq():
+    return render_template("faq.html")
+
+@app.route('/contact', methods=['POST', 'GET'])
+def contact_us():
+    print("first")
+    if request.method == 'POST':
+        print("caight posy")
+        name = request.form['name']
+        email = request.form['email']
+        phone_number = request.form['phone_number']
+        msg_subject = request.form['msg_subject']
+        message = request.form['message']
+
+        form_data = ContactForm(name=name, email=email, phone_number=phone_number, msg_subject=msg_subject, message=message)
+        print("create_db")
+        db.session.add(form_data)
+        db.session.commit()
+
+        # Send email notification
+        send_email(name, email, msg_subject, message)
+
+        return "Form data submitted successfully!"
+    print("last")
+    return render_template("contact-us.html")
     
 @app.route('/about')
 def about():
@@ -207,25 +221,13 @@ def my_account():
 
 
 
-@app.route('/login')
-def login():
-    return render_template("log-in.html")
 
-@app.route('/register')
-def register():
-    return render_template("register.html")
-
-@app.route('/recover-password')
-def recover_password():
-    return render_template("recover-password.html")
 
 @app.route('/global-location')
 def global_location():
     return render_template("global-location.html")
 
-@app.route('/faq')
-def faq():
-    return render_template("faq.html")
+
 
 @app.route('/privacy-policy')
 def privacy_policy():
@@ -239,9 +241,6 @@ def terms_and_conditions():
 def coming_soon():
     return render_template("coming-soon.html")
 
-@app.route('/404')
-def error_404():
-    return render_template("404.html"), 404
 
 @app.route('/services')
 def services():
@@ -263,161 +262,18 @@ def blog_post():
 def company():
     return render_template("company.html")
 
-@app.route('/contact')
-def contact_us():
-    return render_template("contact-us.html")
 
 @app.route('/get-quote')
 def get_quote():
     return render_template("pricing-style-two.html")
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-@app.route('/register', methods=["POST", "GET"])
-def registerz():
-    form = RegisterForm()
-    if request.method == "POST":
-        pwd = form.password.data
-        new_user = User(
-            email=form.email.data,
-            name=form.name.data,
-            password= generate_password_hash(password=pwd, method="pbkdf2:sha256", salt_length=8)
-        )
-        try:
-            db.session.add(new_user)
-            db.session.commit()
-        except IntegrityError:
-            flash("Email is registered already, Kindly login instead")
-            return redirect(url_for("login"))
-        else:
-            new_user = db.session.query(User).filter_by(email=form.email.data).first()
-            login_user(new_user)
-            return redirect(url_for("get_all_posts"))
-       
-    return render_template("register.html", form=form)
-
-
-@app.route('/login', methods=["POST", "GET"])
-def loginz():
-    form = LoginForm()
-    print("here")
-    if request.method == "POST":
-        try:
-            user=db.session.query(User).filter_by(email=form.email.data).first()
-        except:
-            flash("This email does not exist")
-            return redirect(url_for("login"))
-        else:
-            is_match = check_password_hash(user.password, form.password.data)
-            if is_match:
-                login_user(user)
-                return redirect(url_for("get_all_posts"))
-            else:
-                flash("Incorrect Password")
-                return redirect(url_for("login"))
-            
-    return render_template("login.html", form=form)
-
-
-@app.route('/logout')
-@login_required
-def logoutz():
-    logout_user()
-    return redirect(url_for('get_all_posts'))
-
-
-@app.route("/post/<int:post_id>", methods=["POST", "GET"])
-def show_postz(post_id):
-    requested_post = db.session.query(BlogPost).get(post_id)
-    comments =  db.session.query(Comment).filter_by(blog_id=post_id)
-    form = CommentForm()
-    if request.method == "POST":
-        if current_user.is_authenticated:
-            comment= Comment(
-                author=current_user,
-                blog=requested_post,
-                text=form.comment.data,
-            )
-            db.session.add(comment)
-            db.session.commit()
-        else:
-            flash("You need to be logged in to post comments")
-            return redirect(url_for("login"))
-        return redirect(url_for("show_post", post_id=post_id, post=requested_post, form=form, all_comments=comments))
-    return render_template("post.html", post=requested_post, form=form, all_comments=comments)
-
-
-@app.route("/about")
-def aboutz():
-    return render_template("about.html")
-
-
-@app.route("/contact")
-def contactz():
-    return render_template("contact.html")
-
-
-@app.route("/new-post", methods=["POST", "GET"])
-def add_new_postz():
-    form = CreatePostForm()
-    if form.validate_on_submit():
-        new_post = BlogPost(
-            title=form.title.data,
-            subtitle=form.subtitle.data,
-            body=form.body.data,
-            img_url=form.img_url.data,
-            author=current_user,
-            date=date.today().strftime("%B %d, %Y")
-        )
-        db.session.add(new_post)
-        db.session.commit()
-        return redirect(url_for("get_all_posts"))
-    return render_template("make-post.html", form=form)
-
-
-@app.route("/edit-post/<int:post_id>", methods=["POST", "GET"])
-@admins_only
-def edit_postz(post_id):
-    post = BlogPost.query.get(post_id)
-    edit_form = CreatePostForm(
-        title=post.title,
-        subtitle=post.subtitle,
-        img_url=post.img_url,
-        # author=post.author,
-        body=post.body
-    )
-    if edit_form.validate_on_submit():
-        post.title = edit_form.title.data
-        post.subtitle = edit_form.subtitle.data
-        post.img_url = edit_form.img_url.data
-        # post.author = edit_form.author.data
-        post.body = edit_form.body.data
-        db.session.commit()
-        return redirect(url_for("show_post", post_id=post.id))
-
-    return render_template("make-post.html", form=edit_form)
-
-
-@app.route("/delete/<int:post_id>")
-@admins_only
-def delete_postz(post_id):
-    post_to_delete = BlogPost.query.get(post_id)
-    db.session.delete(post_to_delete)
-    db.session.commit()
-    return redirect(url_for('get_all_posts'))
-
+@app.route('/404')
+def error_404():
+    return render_template("404.html"), 404
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
