@@ -165,6 +165,10 @@ def coming_soonest():
 def home():
     return render_template("index.html")
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+    
 @app.route('/about')
 def about():
     return render_template("about-us.html")
@@ -237,7 +241,7 @@ def coming_soon():
 
 @app.route('/404')
 def error_404():
-    return render_template("404.html")
+    return render_template("404.html"), 404
 
 @app.route('/services')
 def services():

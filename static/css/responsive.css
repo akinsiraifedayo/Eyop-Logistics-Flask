@@ -985,7 +985,7 @@
             align-items: unset !important;
   }
   .about-img {
-    background-image: url(../../img/about-img.jpg);
+    background-image: url(../img/about-img.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -993,10 +993,10 @@
     position: relative;
   }
   .about-img.about-img-two {
-    background-image: url(../../img/about-img-2.png);
+    background-image: url(../img/about-img-2.png);
   }
   .about-img.about-img-three {
-    background-image: url(../../img/about-img-3.png);
+    background-image: url(../img/about-img-3.png);
   }
   .about-img .experience {
     bottom: 139px;
@@ -1023,7 +1023,7 @@
             align-items: unset !important;
   }
   .choose-us-img {
-    background-image: url(../../img/choose-us-img.jpg);
+    background-image: url(../img/choose-us-img.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1031,7 +1031,7 @@
     position: relative;
   }
   .choose-us-img.choose-us-img-three {
-    background-image: url(../../img/choose-us-img-3.jpg);
+    background-image: url(../img/choose-us-img-3.jpg);
   }
   .choose-us-img::before {
     content: "";

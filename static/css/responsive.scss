@@ -1215,17 +1215,17 @@ $box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
         }
     }
     .about-img {
-        background-image: url(../../img/about-img.jpg);
+        background-image: url(../img/about-img.jpg);
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
         height: 100%;
         position: relative;
         &.about-img-two {
-            background-image: url(../../img/about-img-2.png);
+            background-image: url(../img/about-img-2.png);
         }
         &.about-img-three {
-            background-image: url(../../img/about-img-3.png);
+            background-image: url(../img/about-img-3.png);
         }
         .experience {
             bottom: 139px;
@@ -1253,14 +1253,14 @@ $box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
         }
     }
     .choose-us-img {
-        background-image: url(../../img/choose-us-img.jpg);
+        background-image: url(../img/choose-us-img.jpg);
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
         height: 100%;
         position: relative;
         &.choose-us-img-three {
-            background-image: url(../../img/choose-us-img-3.jpg);
+            background-image: url(../img/choose-us-img-3.jpg);
         }
         &::before {
             content: "";
