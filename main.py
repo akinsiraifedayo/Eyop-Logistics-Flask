@@ -35,6 +35,8 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 app.config['MAIL_USERNAME'] = os.getenv('MY_EMAIL') # Replace with your email
 app.config['MAIL_PASSWORD'] = os.getenv('MY_PWD')  # Replace with your email password
+SUPPORT_MAIL = os.getenv('SUPPORT_MAIL')  # Replace with where all mails should be sent
+
 ssl_context = ssl.create_default_context()
 mail = Mail(app)
 
@@ -131,7 +133,7 @@ def send_contact_email():
             db.session.add(form_data)
             db.session.commit()
 
-            msg = Message('New Contact Form Submission', sender=email, recipients=["akinsiraolympicson@gmail.com"])
+            msg = Message('New Contact Form Submission', sender=email, recipients=[SUPPORT_MAIL])
             msg.body = f"Name: {name}\nEmail: {email}\nSubject: {msg_subject}\nMessage: {message}"
             msg.reply_to = email
             mail.send(msg)
@@ -163,11 +165,11 @@ def send_quote_email():
             r_email = request_form['r_email']
             r_phone_number = request_form['r_phone_number']
 
-            msg = Message('New Quote Request', sender=s_email, recipients=["akinsiraolympicson@gmail.com"])
+            msg = Message('New Quote Request', sender=s_email, recipients=[SUPPORT_MAIL])
             msg.body = (f"Sender Name: {s_name}\nSender Email: {s_email}\nSender Phone: {s_phone_number}\n\n"
-                        f"Reciever Name: {r_name}\nReciever Email: {r_email}\nReciever Phone: {r_phone_number}"
+                        f"Reciever Name: {r_name}\nReciever Email: {r_email}\nReciever Phone: {r_phone_number}\n\n"
                         f"Transport Type: {transport_type}\nCity of Departure: {city_of_departure}\nCity of Arrival: {city_of_arrival}\n\n"
-                        f"Shipment Type: {shipment_type}\nWidth: {width}\nHeight: {height}\Length: {length}\Weight: {weight}")
+                        f"Shipment Type: {shipment_type}\nWidth: {width}\nHeight: {height}\nLength: {length}\nWeight: {weight}")
                 
             msg.reply_to = s_email
             mail.send(msg)

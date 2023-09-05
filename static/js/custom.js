@@ -1,3 +1,28 @@
+    // Wait for the page to fully load
+    window.onload = function() {
+        // Get the target element's ID
+        var targetId = 'scroll-target';  // Replace with the actual ID
+
+        // Find the target element
+        var targetElement = document.getElementById(targetId);
+
+        // Check if the target element exists
+        if (targetElement) {
+            // Calculate the Y position of the target element
+            var targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+
+            // Scroll to the target position smoothly
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+
+
+	
+
 var currentYear = new Date().getFullYear();
 
 // Find the element with the id "currentYear" and set its text content
