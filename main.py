@@ -123,7 +123,7 @@ def send_contact_email(request_form):
     # send_contact_email(name, email, msg_subject, message)
     # return redirect(url_for("contact_us"))
     # with app.app_context:
-    msg = Message('New Contact Form Submission', sender=email, recipients=['your_email@example.com'])
+    msg = Message('New Contact Form Submission', sender=email, recipients=[email])
     msg.body = f"Name: {name}\nEmail: {email}\nSubject: {msg_subject}\nMessage: {message}"
     msg.reply_to = email
     mail.send(msg)
