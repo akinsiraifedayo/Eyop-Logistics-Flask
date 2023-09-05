@@ -17,19 +17,19 @@
               </a>
             </li> -->
           </ul>
-          <div class="tab_content">
+          <div class="tab_content" id="scroll-target">
             <div class="tabs_item">
-              <form method="post" action="{{ url_for('send_quote_email') }}" id="scroll-target">
+              <form method="post" action="{{ url_for('send_quote_email') }}">
                 {% with messages = get_flashed_messages() %}
                   {% if messages %}
                     {% for message in messages %}
-                    <p class="alert-danger">
-                      {{ message }}
+                    <p class="{{ message[1] }}">
+                      {{ message[0] }}
                     </p>
                     {% endfor %}
                   {% endif %}
                 {% endwith %}
-                {% if sent != "True" %}
+                <!-- {% if sent != "True" %} -->
                 <div class="row">
                   <div class="col-12">
                     <h3>Personal Data</h3>
@@ -226,13 +226,13 @@
                   </div>
                  
       
-                  {% else %}
+                  <!-- {% else %}
                   <div class="col-12">
-                    <button class="default-btn disabled" type="submit" disabled>
+                    <button class="btn default-btn disabled" type="submit" disabled>
                       Quote Sent
                     </button>
                   </div>
-                  {% endif %}
+                  {% endif %} -->
                   
                 </div>
               </form>

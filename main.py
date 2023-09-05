@@ -137,6 +137,7 @@ def send_contact_email():
             msg.body = f"Name: {name}\nEmail: {email}\nSubject: {msg_subject}\nMessage: {message}"
             msg.reply_to = email
             mail.send(msg)
+            flash("Your request has been sent successfully", "success")
         except:
             flash("Please enter valid inputs.", "danger")
             return redirect(request.referrer)
@@ -174,6 +175,7 @@ def send_quote_email():
             msg.reply_to = s_email
             mail.send(msg)
             sent=True
+            flash("Quote Sent Successfully", "success")
             return redirect(f"{request.referrer}?sent={sent}")
         except:
             flash("Please enter valid inputs.", "danger")
@@ -244,13 +246,13 @@ def contact_us():
     
 @app.route('/send-quote')
 def send_quote():
-
     return render_template('expression')
 
 
 @app.route('/about')
 def about():
-    return render_template("about-us.html")
+    sent = request.args.get("sent")
+    return render_template("about-us.html", sent=sent)
 
 @app.route('/pricing')
 def pricing():
@@ -325,7 +327,8 @@ def blog_post():
 
 @app.route('/company')
 def company():
-    return render_template("company.html")
+    sent = request.args.get("sent")
+    return render_template("company.html", sent=sent)
 
 
 @app.route('/get-quote')

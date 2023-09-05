@@ -1,23 +1,31 @@
-    // Wait for the page to fully load
-    window.onload = function() {
-        // Get the target element's ID
-        var targetId = 'scroll-target';  // Replace with the actual ID
 
-        // Find the target element
-        var targetElement = document.getElementById(targetId);
+// Wait for the page to fully load
+window.onload = function() {
+	// Get the 'sent' query parameter from the URL
+	var urlParams = new URLSearchParams(window.location.search);
+	var sent = urlParams.get('sent');
 
-        // Check if the target element exists
-        if (targetElement) {
-            // Calculate the Y position of the target element
-            var targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+	// Get the target element's ID
+	var targetId = 'scroll-target';  // Replace with the actual ID
 
-            // Scroll to the target position smoothly
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-        }
-    };
+	// Check if the 'sent' parameter is 'True' and the target element exists
+	if (sent === 'True') {
+		var targetElement = document.getElementById(targetId);
+
+		// Check if the target element exists
+		if (targetElement) {
+			// Calculate the Y position of the target element
+			var targetPosition = targetElement.getBoundingClientRect().top - 400 + window.scrollY;
+
+			// Scroll to the target position smoothly
+			window.scrollTo({
+				top: targetPosition,
+				behavior: 'smooth'
+			});
+		}
+	}
+};
+
 
 
 
