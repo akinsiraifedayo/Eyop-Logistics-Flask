@@ -171,10 +171,11 @@ def send_quote_email():
                 
             msg.reply_to = s_email
             mail.send(msg)
-            return redirect(request.referrer, sent=True)
+            sent=True
+            return redirect(f"{request.referrer}?sent={sent}")
         except:
             flash("Please enter valid inputs.", "danger")
-            return redirect(request.referrer, sent=True)
+            return redirect(request.referrer)
     else:
         return redirect(url_for('error_404'))
 
