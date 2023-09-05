@@ -210,8 +210,9 @@ def coming_soonest():
 
 
 @app.route('/', methods=["POST", "GET"])
-def home(): 
-    return render_template("index.html")
+def home():
+    sent = request.args.get("sent")
+    return render_template("index.html", sent=sent)
 
 @app.route('/login')
 def login():
