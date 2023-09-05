@@ -18,7 +18,7 @@
       
       <div class="row">
        <div class="col-lg-6 col-sm-6">
-        <!-- {% if sent != "True" %} -->
+        {% if sent != "True" %}
         <div class="form-group">
          <input class="form-control" data-error="Please enter your name" id="name" name="name" placeholder="Your Name" required="" type="text"/>
          <div class="help-block with-errors">
@@ -79,7 +79,7 @@
         <div class="clearfix">
         </div>
        </div>
-       <!-- {% else %}
+       {% else %}
        <div class="col-12 text">
         <button class="btn default-btn btnd-two disabled" type="submit" disabled>
          <span>
@@ -87,7 +87,7 @@
          </span>
         </button>
        </div>
-        {% endif %} -->
+        {% endif %}
        
       </div>
      </form>
