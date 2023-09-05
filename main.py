@@ -13,7 +13,7 @@ from functools import wraps
 from functions import navigation_items
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
-import os
+import os, ssl
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(32).hex()
@@ -35,6 +35,7 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 app.config['MAIL_USERNAME'] = os.getenv('MY_EMAIL') # Replace with your email
 app.config['MAIL_PASSWORD'] = os.getenv('MY_PWD')  # Replace with your email password
+ssl_context = ssl.create_default_context()
 mail = Mail(app)
 
 print(os.getenv('MY_EMAIL'))
@@ -107,11 +108,26 @@ def isValidEmail(email):
     email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     return re.match(email_pattern, email)
 
-def send_email(name, email, msg_subject, message):
-    msg = Message('New Contact Form Submission', sender='your_email@example.com', recipients=['your_email@example.com'])
+def send_contact_email(request_form):
+    name = request_form['name']
+    email = request_form['email']
+    phone_number = request_form['phone_number']
+    msg_subject = request_form['msg_subject']
+    message = request_form['message']
+
+    form_data = ContactForm(name=name, email=email, phone_number=phone_number, msg_subject=msg_subject, message=message)
+    db.session.add(form_data)
+    db.session.commit()
+
+    # Send email notification
+    # send_contact_email(name, email, msg_subject, message)
+    # return redirect(url_for("contact_us"))
+    # with app.app_context:
+    msg = Message('New Contact Form Submission', sender=email, recipients=['your_email@example.com'])
     msg.body = f"Name: {name}\nEmail: {email}\nSubject: {msg_subject}\nMessage: {message}"
-    msg.reply_to = 'your_email@example.com'
+    msg.reply_to = email
     mail.send(msg)
+    return request.referrer
 
 @app.context_processor
 def inject_current_page():
@@ -156,31 +172,44 @@ def register():
 def recover_password():
     return render_template("recover-password.html")
 
-@app.route('/faq')
+@app.route('/faq', methods=['POST', 'GET'])
 def faq():
+    if request.method == 'POST':
+        send_contact_email(request_form=request.form)
+        # name = request.form['name']
+        # email = request.form['email']
+        # phone_number = request.form['phone_number']
+        # msg_subject = request.form['msg_subject']
+        # message = request.form['message']
+
+        # form_data = ContactForm(name=name, email=email, phone_number=phone_number, msg_subject=msg_subject, message=message)
+        # db.session.add(form_data)
+        # db.session.commit()
+
+        # # Send email notification
+        # send_contact_email(name, email, msg_subject, message)
+        # return redirect(url_for("faq"))
+    
     return render_template("faq.html")
 
 @app.route('/contact', methods=['POST', 'GET'])
 def contact_us():
-    print("first")
     if request.method == 'POST':
-        print("caight posy")
-        name = request.form['name']
-        email = request.form['email']
-        phone_number = request.form['phone_number']
-        msg_subject = request.form['msg_subject']
-        message = request.form['message']
+        send_contact_email(request_form=request.form)
+        # name = request.form['name']
+        # email = request.form['email']
+        # phone_number = request.form['phone_number']
+        # msg_subject = request.form['msg_subject']
+        # message = request.form['message']
 
-        form_data = ContactForm(name=name, email=email, phone_number=phone_number, msg_subject=msg_subject, message=message)
-        print("create_db")
-        db.session.add(form_data)
-        db.session.commit()
+        # form_data = ContactForm(name=name, email=email, phone_number=phone_number, msg_subject=msg_subject, message=message)
+        # db.session.add(form_data)
+        # db.session.commit()
 
-        # Send email notification
-        send_email(name, email, msg_subject, message)
-
-        return "Form data submitted successfully!"
-    print("last")
+        # # Send email notification
+        # send_contact_email(name, email, msg_subject, message)
+        # return redirect(url_for("contact_us"))
+    
     return render_template("contact-us.html")
     
 @app.route('/about')
