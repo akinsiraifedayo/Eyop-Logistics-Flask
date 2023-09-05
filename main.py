@@ -176,7 +176,7 @@ def send_quote_email():
             mail.send(msg)
             sent=True
             flash("Quote Sent Successfully", "success")
-            return redirect(f"{request.referrer}?sent={sent}")
+            return redirect(f"{request.referrer}?sent=d{sent}")
         except:
             flash("Please enter valid inputs.", "danger")
             return redirect(request.referrer)
