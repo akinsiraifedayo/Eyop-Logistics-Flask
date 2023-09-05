@@ -1,173 +1,197 @@
 <section class="track-area ptb-100 jarallax" data-jarallax='{"speed": 0.3}'>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="tab quote-list-tab">
-            <ul class="tabs">
-              <li>
-                <a href="#">
-                  <i class="flaticon-truck"> </i>
-                  Track & Trace
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  Request A Quote
-                  <i class="flaticon-location"> </i>
-                </a>
-              </li>
-            </ul>
-            <div class="tab_content">
-              <div class="tabs_item">
-                <form>
-                  <div class="row">
-                    <div class="col-12">
-                      <h3>Personal Data</h3>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Your Name"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Your Email"
-                          type="email"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Your Phone"
-                          type="text"
-                        />
-                      </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="tab quote-list-tab">
+          <ul class="tabs">
+            <li>
+              <a href="#">
+                <i class="flaticon-truck"> </i>
+                Track & Trace
+              </a>
+            </li>
+            <!-- <li>
+              <a href="#">
+                Request A Quote
+                <i class="flaticon-location"> </i>
+              </a>
+            </li> -->
+          </ul>
+          <div class="tab_content">
+            <div class="tabs_item">
+              <form method="post" action="{{ url_for('send_quote_email') }}">
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                    <p class="alert-danger">
+                      {{ message }}
+                    </p>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+                {% if not sent %}
+                <div class="row">
+                  <div class="col-12">
+                    <h3>Personal Data</h3>
+                  </div>
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        name="s_name"
+                        class="form-control"
+                        placeholder="Your Name"
+                        type="text"
+                      />
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <h3>Reciever Data</h3>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Reciever Name"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Reciever Email"
-                          type="email"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Reciever Phone"
-                          type="text"
-                        />
-                      </div>
+
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        name="s_email"
+                        class="form-control"
+                        placeholder="Your Email"
+                        type="email"
+                      />
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <h3>Shipment Data</h3>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <select>
-                          <option value="1">Road Transport</option>
-                          <option value="2">Sea Transport</option>
-                          <option value="0">Air Transport</option>
-                          
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="City of Departure"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="City of Arrival"
-                          type="text"
-                        />
-                      </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <input
+                        name="s_phone_number"
+                        class="form-control"
+                        placeholder="Your Phone"
+                        type="text"
+                      />
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <select>
-                          <option value="1">Domestic Shipments</option>
-                          <option value="2">International Shipments</option>
-                          
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Width "
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Height"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Weight"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Length"
-                          type="text"
-                        />
-                      </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <h3>Reciever Data</h3>
+                  </div>
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        name="r_name"
+                        class="form-control"
+                        placeholder="Reciever Name"
+                        type="text"
+                      />
                     </div>
                   </div>
-                  <div class="row">
-                    <!-- <div class="col-lg-3 col-sm-6 col-md-3">
+
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        name="r_email"
+                        class="form-control"
+                        placeholder="Reciever Email"
+                        type="email"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <input
+                        name="r_phone_number"
+                        class="form-control"
+                        placeholder="Reciever Phone"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <h3>Shipment Data</h3>
+                  </div>
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="form-group">
+                      <select name="transport_type">
+                        <option value="Road Transport">Road Transport</option>
+                        <option value="Sea Transport">Sea Transport</option>
+                        <option value="Air Transport">Air Transport</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        name="city_of_departure"
+                        class="form-control"
+                        placeholder="City of Departure"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <input
+                        name="city_of_arrival"
+                        class="form-control"
+                        placeholder="City of Arrival"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="form-group">
+                      <select name="shipment_type">
+                        <option value="Domestic Shipments">
+                          Domestic Shipments
+                        </option>
+                        <option value="International Shipments">
+                          International Shipments
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        name="width"
+                        class="form-control"
+                        placeholder="Width "
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        name="height"
+                        class="form-control"
+                        placeholder="Height"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        name="weight"
+                        class="form-control"
+                        placeholder="Weight"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <div class="form-group">
+                      <input
+                        name="length"
+                        class="form-control"
+                        placeholder="Length"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- <div class="col-lg-3 col-sm-6 col-md-3">
                       <label class="single-check">
                         Express Delivery
                         <input checked="checked" name="radio" type="radio" />
@@ -195,136 +219,146 @@
                         <span class="checkmark"> </span>
                       </label>
                     </div>  -->
-                    <div class="col-12">
-                      <button class="default-btn" type="submit">
-                        Request A Quote
-                      </button>
-                    </div>
+                  <div class="col-12">
+                    <button class="default-btn" type="submit">
+                      Request A Quote
+                    </button>
                   </div>
-                </form>
-              </div>
-              <div class="tabs_item">
-                <form>
-                  <div class="row">
-                    <div class="col-12">
-                      <h3>Shipment Data</h3>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <select>
-                          <option value="1">Road Transport</option>
-                          <option value="2">Sea Transport</option>
-                          <option value="0">Air Transport</option>
-                          
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="City of Departure"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="City of Arrival"
-                          type="text"
-                        />
-                      </div>
-                    </div>
+                 
+      
+                  {% else %}
+                  <div class="col-12">
+                    <button class="default-btn disabled" type="submit" disabled>
+                      Quote Sent
+                    </button>
                   </div>
-                  <div class="row">
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <select>
-                          <option value="1">Domestic Shipments</option>
-                          <option value="2">International Shipments</option>
-                          
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Width "
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Height"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Weight"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <input
-                          class="form-control"
-                          placeholder="Length"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Express Delivery
-                        <input checked="checked" name="radio" type="radio" />
-                        <span class="checkmark"> </span>
-                      </label>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Ocean Freight
-                        <input name="radio" type="radio" />
-                        <span class="checkmark"> </span>
-                      </label>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Road Freight
-                        <input name="radio" type="radio" />
-                        <span class="checkmark"> </span>
-                      </label>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Air Freight
-                        <input name="radio" type="radio" />
-                        <span class="checkmark"> </span>
-                      </label>
-                    </div>
-                    <div class="col-12">
-                      <button class="default-btn" type="submit">
-                        Request A Quote
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
+                  {% endif %}
+                  
+                </div>
+              </form>
             </div>
+
+            <!-- form b -->
+            <!-- <div class="tabs_item">
+              <form>
+                <div class="row">
+                  <div class="col-12">
+                    <h3>Shipment Data</h3>
+                  </div>
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="form-group">
+                      <select>
+                        <option value="1">Road Transport</option>
+                        <option value="2">Sea Transport</option>
+                        <option value="0">Air Transport</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        class="form-control"
+                        placeholder="City of Departure"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <input
+                        class="form-control"
+                        placeholder="City of Arrival"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="form-group">
+                      <select>
+                        <option value="1">Domestic Shipments</option>
+                        <option value="2">International Shipments</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        class="form-control"
+                        placeholder="Width "
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        class="form-control"
+                        placeholder="Height"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-sm-6">
+                    <div class="form-group">
+                      <input
+                        class="form-control"
+                        placeholder="Weight"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <div class="form-group">
+                      <input
+                        class="form-control"
+                        placeholder="Length"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-sm-6 col-md-3">
+                    <label class="single-check">
+                      Express Delivery
+                      <input checked="checked" name="radio" type="radio" />
+                      <span class="checkmark"> </span>
+                    </label>
+                  </div>
+                  <div class="col-lg-3 col-sm-6 col-md-3">
+                    <label class="single-check">
+                      Ocean Freight
+                      <input name="radio" type="radio" />
+                      <span class="checkmark"> </span>
+                    </label>
+                  </div>
+                  <div class="col-lg-3 col-sm-6 col-md-3">
+                    <label class="single-check">
+                      Road Freight
+                      <input name="radio" type="radio" />
+                      <span class="checkmark"> </span>
+                    </label>
+                  </div>
+                  <div class="col-lg-3 col-sm-6 col-md-3">
+                    <label class="single-check">
+                      Air Freight
+                      <input name="radio" type="radio" />
+                      <span class="checkmark"> </span>
+                    </label>
+                  </div>
+                  <div class="col-12">
+                    <button class="default-btn" type="submit">
+                      Request A Quote
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

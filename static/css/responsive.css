@@ -509,7 +509,7 @@
   .pagination-area {
     margin-top: 0;
   }
-  .main-contact-area #contactForm {
+  .main-contact-area #contactFormd {
     padding: 20px;
   }
   .blog-details-content .comments ul li {
@@ -931,7 +931,7 @@
   .contact-form-action.mb-50 {
     margin-bottom: 50px;
   }
-  .main-contact-area #contactForm {
+  .main-contact-area #contactFormd {
     padding: 30px;
   }
   .services-details-area .sidebar-widget.search {

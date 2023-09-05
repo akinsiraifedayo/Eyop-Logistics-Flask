@@ -84,6 +84,14 @@ class ContactForm(db.Model):
     msg_subject = db.Column(db.String(255), nullable=False)
     message = db.Column(db.Text, nullable=False)
 
+class RequestForm(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), nullable=False)
+    phone_number = db.Column(db.String(20), nullable=False)
+    msg_subject = db.Column(db.String(255), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+
 with app.app_context():
     db.create_all()
 
@@ -108,26 +116,68 @@ def isValidEmail(email):
     email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     return re.match(email_pattern, email)
 
-def send_contact_email(request_form):
-    name = request_form['name']
-    email = request_form['email']
-    phone_number = request_form['phone_number']
-    msg_subject = request_form['msg_subject']
-    message = request_form['message']
+@app.route('/send-contact-email', methods=["POST"])
+def send_contact_email():
+    request_form = request.form
+    if request.method == "POST":
+        try:
+            name = request_form['name']
+            email = request_form['email']
+            phone_number = request_form['phone_number']
+            msg_subject = request_form['msg_subject']
+            message = request_form['message']
 
-    form_data = ContactForm(name=name, email=email, phone_number=phone_number, msg_subject=msg_subject, message=message)
-    db.session.add(form_data)
-    db.session.commit()
+            form_data = ContactForm(name=name, email=email, phone_number=phone_number, msg_subject=msg_subject, message=message)
+            db.session.add(form_data)
+            db.session.commit()
 
-    # Send email notification
-    # send_contact_email(name, email, msg_subject, message)
-    # return redirect(url_for("contact_us"))
-    # with app.app_context:
-    msg = Message('New Contact Form Submission', sender=email, recipients=["akinsiraolympicson@gmail.com"])
-    msg.body = f"Name: {name}\nEmail: {email}\nSubject: {msg_subject}\nMessage: {message}"
-    msg.reply_to = email
-    mail.send(msg)
-    return redirect(request.referrer)
+            msg = Message('New Contact Form Submission', sender=email, recipients=["akinsiraolympicson@gmail.com"])
+            msg.body = f"Name: {name}\nEmail: {email}\nSubject: {msg_subject}\nMessage: {message}"
+            msg.reply_to = email
+            mail.send(msg)
+        except:
+            flash("Please enter valid inputs.", "danger")
+            return redirect(request.referrer)
+        return redirect(request.referrer)
+    else:
+        return redirect(url_for('error_404'))
+
+@app.route('/send-quote-email', methods=["POST"])
+def send_quote_email():
+    request_form = request.form
+    if request.method == "POST":
+        try:
+            transport_type = request_form['transport_type']
+            city_of_departure = request_form['city_of_departure']
+            city_of_arrival = request_form['city_of_arrival']
+            shipment_type = request_form['shipment_type']
+            width = request_form['width']
+            height = request_form['height']
+            weight = request_form['weight']
+            length = request_form['width']
+
+            s_name = request_form['s_name']
+            s_email = request_form['s_email']
+            s_phone_number = request_form['s_phone_number']
+            r_name = request_form['r_name']
+            r_email = request_form['r_email']
+            r_phone_number = request_form['r_phone_number']
+
+            msg = Message('New Quote Request', sender=s_email, recipients=["akinsiraolympicson@gmail.com"])
+            msg.body = (f"Sender Name: {s_name}\nSender Email: {s_email}\nSender Phone: {s_phone_number}\n\n"
+                        f"Reciever Name: {r_name}\nReciever Email: {r_email}\nReciever Phone: {r_phone_number}"
+                        f"Transport Type: {transport_type}\nCity of Departure: {city_of_departure}\nCity of Arrival: {city_of_arrival}\n\n"
+                        f"Shipment Type: {shipment_type}\nWidth: {width}\nHeight: {height}\Length: {length}\Weight: {weight}")
+                
+            msg.reply_to = s_email
+            mail.send(msg)
+            return redirect(request.referrer, sent=True)
+        except:
+            flash("Please enter valid inputs.", "danger")
+            return redirect(request.referrer, sent=True)
+    else:
+        return redirect(url_for('error_404'))
+
 
 @app.context_processor
 def inject_current_page():
@@ -156,8 +206,8 @@ def coming_soonest():
 
 
 
-@app.route('/')
-def home():
+@app.route('/', methods=["POST", "GET"])
+def home(): 
     return render_template("index.html")
 
 @app.route('/login')
@@ -174,44 +224,26 @@ def recover_password():
 
 @app.route('/faq', methods=['POST', 'GET'])
 def faq():
-    if request.method == 'POST':
-        send_contact_email(request_form=request.form)
-        # name = request.form['name']
-        # email = request.form['email']
-        # phone_number = request.form['phone_number']
-        # msg_subject = request.form['msg_subject']
-        # message = request.form['message']
+    sent = request.args.get("sent")
+    # if request.method == 'POST':
+    #     send_contact_email(request_form=request.form)
 
-        # form_data = ContactForm(name=name, email=email, phone_number=phone_number, msg_subject=msg_subject, message=message)
-        # db.session.add(form_data)
-        # db.session.commit()
-
-        # # Send email notification
-        # send_contact_email(name, email, msg_subject, message)
-        # return redirect(url_for("faq"))
-    
-    return render_template("faq.html")
+    return render_template("faq.html", sent=sent)
 
 @app.route('/contact', methods=['POST', 'GET'])
 def contact_us():
-    if request.method == 'POST':
-        send_contact_email(request_form=request.form)
-        # name = request.form['name']
-        # email = request.form['email']
-        # phone_number = request.form['phone_number']
-        # msg_subject = request.form['msg_subject']
-        # message = request.form['message']
-
-        # form_data = ContactForm(name=name, email=email, phone_number=phone_number, msg_subject=msg_subject, message=message)
-        # db.session.add(form_data)
-        # db.session.commit()
-
-        # # Send email notification
-        # send_contact_email(name, email, msg_subject, message)
-        # return redirect(url_for("contact_us"))
+    sent = request.args.get("sent")
+    # if request.method == 'POST':
+    #     send_contact_email(request_form=request.form)
     
-    return render_template("contact-us.html")
+    return render_template("contact-us.html", sent=sent)
     
+@app.route('/send-quote')
+def send_quote():
+
+    return render_template('expression')
+
+
 @app.route('/about')
 def about():
     return render_template("about-us.html")
