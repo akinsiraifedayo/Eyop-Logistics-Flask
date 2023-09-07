@@ -62,9 +62,13 @@
     </div>
     <div class="row">
      <div class="col-lg-4 col-sm-6">
+      {% for product in all_products.items %}
+      
+    
+
       <div class="single-product">
        <div class="product-img">
-        <img alt="Image" src='{{ url_for("static", filename="img/product/product-1.jpg") }}'/>
+        <img alt="Image" src='{{ product.img_url }}'/>
         <ul>
          <li>
           <a data-bs-toggle="modal" href="#product-view-one">
@@ -82,190 +86,52 @@
        </div>
        <a href="{{ url_for('product_details') }}">
         <h3>
-         Delivery Box Small
+          {{ product.title }}
         </h3>
        </a>
        <span>
-        $190.00
+        {{ product.price }}
        </span>
-       <a class="default-btn" href="{{ url_for('cart') }}">
+       <a class="default-btn" href="{{ product.product_url }}">
         <span>
-         Add To Cart
+         Purchase Product
         </span>
        </a>
       </div>
      </div>
-     <div class="col-lg-4 col-sm-6">
-      <div class="single-product">
-       <div class="product-img">
-        <img alt="Image" src='{{ url_for("static", filename="img/product/product-2.jpg") }}'/>
-        <ul>
-         <li>
-          <a data-bs-toggle="modal" href="#product-view-one">
-           <i class="bx bx-show-alt">
-           </i>
-          </a>
-         </li>
-         <li>
-          <a href="#">
-           <i class="bx bx-heart">
-           </i>
-          </a>
-         </li>
-        </ul>
-       </div>
-       <a href="{{ url_for('product_details') }}">
-        <h3>
-         Delivery Box Medium
-        </h3>
-       </a>
-       <span>
-        $90.00
-       </span>
-       <a class="default-btn" href="{{ url_for('cart') }}">
-        <span>
-         Add To Cart
-        </span>
-       </a>
-      </div>
-     </div>
-     <div class="col-lg-4 col-sm-6">
-      <div class="single-product">
-       <div class="product-img">
-        <img alt="Image" src='{{ url_for("static", filename="img/product/product-3.jpg") }}'/>
-        <ul>
-         <li>
-          <a data-bs-toggle="modal" href="#product-view-one">
-           <i class="bx bx-show-alt">
-           </i>
-          </a>
-         </li>
-         <li>
-          <a href="#">
-           <i class="bx bx-heart">
-           </i>
-          </a>
-         </li>
-        </ul>
-       </div>
-       <a href="{{ url_for('product_details') }}">
-        <h3>
-         Delivery Box
-        </h3>
-       </a>
-       <span>
-        $120.0
-       </span>
-       <a class="default-btn" href="{{ url_for('cart') }}">
-        <span>
-         Add To Cart
-        </span>
-       </a>
-      </div>
-     </div>
-     <div class="col-lg-4 col-sm-6">
-      <div class="single-product">
-       <div class="product-img">
-        <img alt="Image" src='{{ url_for("static", filename="img/product/product-4.jpg") }}'/>
-        <ul>
-         <li>
-          <a data-bs-toggle="modal" href="#product-view-one">
-           <i class="bx bx-show-alt">
-           </i>
-          </a>
-         </li>
-         <li>
-          <a href="#">
-           <i class="bx bx-heart">
-           </i>
-          </a>
-         </li>
-        </ul>
-       </div>
-       <a href="{{ url_for('product_details') }}">
-        <h3>
-         Delivery Box
-        </h3>
-       </a>
-       <span>
-        $50.00
-       </span>
-       <a class="default-btn" href="{{ url_for('cart') }}">
-        <span>
-         Add To Cart
-        </span>
-       </a>
-      </div>
-     </div>
-     <div class="col-lg-4 col-sm-6">
-      <div class="single-product">
-       <div class="product-img">
-        <img alt="Image" src='{{ url_for("static", filename="img/product/product-5.jpg") }}'/>
-        <ul>
-         <li>
-          <a data-bs-toggle="modal" href="#product-view-one">
-           <i class="bx bx-show-alt">
-           </i>
-          </a>
-         </li>
-         <li>
-          <a href="#">
-           <i class="bx bx-heart">
-           </i>
-          </a>
-         </li>
-        </ul>
-       </div>
-       <a href="{{ url_for('product_details') }}">
-        <h3>
-         Delivery Box Medium
-        </h3>
-       </a>
-       <span>
-        $100.00
-       </span>
-       <a class="default-btn" href="{{ url_for('cart') }}">
-        <span>
-         Add To Cart
-        </span>
-       </a>
-      </div>
-     </div>
-     <div class="col-lg-4 col-sm-6">
-      <div class="single-product">
-       <div class="product-img">
-        <img alt="Image" src='{{ url_for("static", filename="img/product/product-6.jpg") }}'/>
-        <ul>
-         <li>
-          <a data-bs-toggle="modal" href="#product-view-one">
-           <i class="bx bx-show-alt">
-           </i>
-          </a>
-         </li>
-         <li>
-          <a href="#">
-           <i class="bx bx-heart">
-           </i>
-          </a>
-         </li>
-        </ul>
-       </div>
-       <a href="{{ url_for('product_details') }}">
-        <h3>
-         Delivery Box Big
-        </h3>
-       </a>
-       <span>
-        $130.00
-       </span>
-       <a class="default-btn" href="{{ url_for('cart') }}">
-        <span>
-         Add To Cart
-        </span>
-       </a>
-      </div>
-     </div>
+     {% endfor %}
+
      <div class="col-lg-12 col-md-12">
+
+      <div class="pagination-area">
+        {% if all_products.has_prev %}
+            <a href="{{ url_for('products', page=all_products.prev_num) }}" class="prev page-numbers"><i class="bx bx-chevron-left"></i></a>
+        {% endif %}
+
+        {% for page_num in all_products.iter_pages() %}
+            {% if page_num %}
+                {% if page_num == blog_posts.page %}
+                <span aria-current="page" class="page-numbers current">
+                  {{ page_num }}
+                 </span>
+                    
+                {% else %}
+                <a class="page-numbers" href="{{ url_for('product', page=page_num) }}">
+                  {{ page_num }}
+                 </a>
+                {% endif %}
+            {% else %}
+                <span>...</span>
+            {% endif %}
+        {% endfor %}
+
+        {% if all_products.has_next %}
+        <a class="next page-numbers" href="{{ url_for('products', page=all_products.next_num) }}">
+          <i class="bx bx-chevron-right">
+          </i>
+         </a>
+        {% endif %}
+    </div>
       <div class="pagination-area">
        <!--
 								<a href="#" class="prev page-numbers">

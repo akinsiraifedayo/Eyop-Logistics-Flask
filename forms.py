@@ -11,6 +11,15 @@ class CreatePostForm(FlaskForm):
     body = CKEditorField("Blog Content", validators=[DataRequired()])
     submit = SubmitField("Submit Post")
 
+class CreateProductForm(FlaskForm):
+    title = StringField("Product Title", validators=[DataRequired()])
+    subtitle = StringField("Product Description", validators=[DataRequired()])
+    img_url = StringField("Product Image URL", validators=[DataRequired(), URL()])
+    product_url = StringField("Product Purchase URL", validators=[DataRequired(), URL()])
+    price = StringField("Product Price", validators=[DataRequired()])
+    # body = CKEditorField("Product Description", validators=[DataRequired()])
+    submit = SubmitField("Submit Product")
+
 class RegisterForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])

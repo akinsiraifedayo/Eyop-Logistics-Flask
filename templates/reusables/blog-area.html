@@ -10,7 +10,7 @@
       </div>
       <div class="row">
         <div class="blog-slider owl-carousel owl-theme">
-          <div class="single-blog-post">
+          <!-- <div class="single-blog-post">
             <div class="post-image">
               <a href="#">
                 <img
@@ -31,11 +31,12 @@
               <p>
                 EYOP Logistics revolutionizes shipping standards, enhancing efficiency, and delivering exceptional service. Explore our world-class logistics solutions today.
               </p>
-              <a class="default-btn" href="{{ url_for('blog_post') }}">
+              <a class="default-btn" href="{{ url_for('show_post', post_id=1) }}">
                 <span> Read More </span>
               </a>
             </div>
-          </div>
+          </div> -->
+          {% for post in all_posts %}
           <div class="single-blog-post">
             <div class="post-image">
               <a href="#">
@@ -48,75 +49,30 @@
             <div class="blog-content">
               <div class="date">
                 <i class="bx bx-calendar"> </i>
-                <span> 06 October 2019 </span>
+                <span> {{post.date}} </span>
               </div>
               <h3>
                 <a href="#">
-                  New Cargo Shipment Is Open On The Global Market
+                  {{post.title}}
                 </a>
               </h3>
               <p>
-                Explore new horizons in cargo shipment as EYOP Logistics opens doors to the global market. Discover seamless, efficient, and cost-effective solutions for your shipping needs. Join us today and redefine your logistics experience.
+                {{post.subtitle}}
               </p>
-              <a class="default-btn" href="{{ url_for('blog_post') }}">
+              <a class="default-btn" href="{{ url_for('show_post', post_id=post.id) }}">
                 <span> Read More </span>
               </a>
-            </div>
-          </div>
-          <div class="single-blog-post">
-            <div class="post-image">
-              <a href="#">
-                <img
-                  alt="image"
-                  src='{{ url_for("static", filename="img/blog/blog-2.jpg") }}'
-                />
-              </a>
-            </div>
-            <div class="blog-content">
-              <div class="date">
-                <i class="bx bx-calendar"> </i>
-                <span> 07 October 2019 </span>
-              </div>
-              <h3>
-                <a href="#">
-                  Transportation Charged Has Removed Form This Months
-                </a>
-              </h3>
-              <p>
-                Good news! Starting this month, we've removed transportation charges, making your shipments even more cost-effective. Experience savings and convenience with EYOP Logistics.
-              </p>
-              <a class="default-btn" href="{{ url_for('blog_post') }}">
+              {% if current_user.id == 1 %}
+              <a class="default-btn" href="{{ url_for('show_post', post_id=post.id) }}">
                 <span> Read More </span>
               </a>
+              <a href="{{url_for('delete_post', post_id=post.id) }}">✘</a>
+              {% endif %}
             </div>
           </div>
-          <div class="single-blog-post">
-            <div class="post-image">
-              <a href="#">
-                <img
-                  alt="image"
-                  src='{{ url_for("static", filename="img/blog/blog-3.jpg") }}'
-                />
-              </a>
-            </div>
-            <div class="blog-content">
-              <div class="date">
-                <i class="bx bx-calendar"> </i>
-                <span> 08 October 2019 </span>
-              </div>
-              <h3>
-                <a href="#">
-                  Marketing Policy Added Into The Logistic Service
-                </a>
-              </h3>
-              <p>
-                Introducing our new marketing policy, seamlessly integrated into our logistics services. Discover how EYOP Logistics is taking your shipping experience to the next level with added value and benefits.
-              </p>
-              <a class="default-btn" href="{{ url_for('blog_post') }}">
-                <span> Read More </span>
-              </a>
-            </div>
-          </div>
+          {% endfor %}
+         
+         
           
         </div>
       </div>

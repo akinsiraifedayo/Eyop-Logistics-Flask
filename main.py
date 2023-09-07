@@ -7,13 +7,15 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 from sqlalchemy.exc import IntegrityError
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
-from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
+from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm, CreateProductForm
 from flask_gravatar import Gravatar
 from functools import wraps
 from functions import navigation_items
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
 import os, ssl
+from flask_paginate import Pagination
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(32).hex()
@@ -48,10 +50,30 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
     name = db.Column(db.String(250), nullable=False)
+    phone = db.Column(db.String(250), nullable=False)
     posts = db.relationship("BlogPost", back_populates="author")
+    products = db.relationship("Product", back_populates="author")
     comments = db.relationship("Comment", back_populates="author")
 
+class Product(db.Model):
+    __tablename__ = "products"
+    id = db.Column(db.Integer, primary_key=True)
+    
+    #Create reference to the User object, the "posts" refers to the posts protperty in the User class.
+    author = db.relationship("User", back_populates="posts")
+    #Create Foreign Key, "users.id" the users refers to the tablename of User.
+    author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
+    title = db.Column(db.String(250), unique=True, nullable=False)
+    img_url = db.Column(db.String(250), nullable=False)
+    product_url = db.Column(db.String(250), nullable=False)
+    price =  db.Column(db.String(250), nullable=False)
+    subtitle = db.Column(db.String(250))
+    date = db.Column(db.String(250), nullable=False)
+    body = db.Column(db.Text)
+
+    
+   
 class BlogPost(db.Model):
     __tablename__ = "blog_posts"
     id = db.Column(db.Integer, primary_key=True)
@@ -67,6 +89,7 @@ class BlogPost(db.Model):
     date = db.Column(db.String(250), nullable=False)
     body = db.Column(db.Text, nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
+
 
 
 class Comment(db.Model):
@@ -136,10 +159,10 @@ def send_contact_email():
             msg = Message('New Contact Form Submission', sender=email, recipients=[SUPPORT_MAIL])
             msg.body = f"Name: {name}\nEmail: {email}\nSubject: {msg_subject}\nMessage: {message}"
             msg.reply_to = email
-            mail.send(msg)
-            flash("Your request has been sent successfully", "success")
+            # mail.send(msg)
+            flash("success Your request has been sent successfully")
         except:
-            flash("Please enter valid inputs.", "danger")
+            flash("dangerPlease enter valid inputs.")
             return redirect(request.referrer)
         return redirect(request.referrer)
     else:
@@ -173,12 +196,12 @@ def send_quote_email():
                         f"Shipment Type: {shipment_type}\nWidth: {width}\nHeight: {height}\nLength: {length}\nWeight: {weight}")
                 
             msg.reply_to = s_email
-            mail.send(msg)
+            # mail.send(msg)
             sent=True
-            flash("Quote Sent Successfully", "success")
+            flash("success Quote Sent Successfully")
             return redirect(f"{request.referrer}?sent={sent}")
         except:
-            flash("Please enter valid inputs.", "danger")
+            flash("danger Please enter valid inputs.")
             return redirect(request.referrer)
     else:
         return redirect(url_for('error_404'))
@@ -204,24 +227,68 @@ def coming_soonest():
             return redirect(url_for("coming_soonest", subscribed=True))
         else:
             # Email is not valid
-            flash("Please enter a valid email address.", "danger")
+            flash("danger Please enter a valid email address.", "danger")
             return redirect(url_for("coming_soonest"))
             
     return render_template("coming-soon-copy.html", subscribed=subscribed)
 
 
-
 @app.route('/', methods=["POST", "GET"])
 def home():
+    posts = BlogPost.query.all()
     sent = request.args.get("sent")
-    return render_template("index.html", sent=sent)
+    return render_template("index.html", sent=sent, all_posts=posts)
 
-@app.route('/login')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
+@app.route('/login', methods=["POST", "GET"])
 def login():
+    login_form = request.form
+    if request.method == "POST":
+        try:
+            user=db.session.query(User).filter_by(email=login_form["email"]).first()
+        except:
+            flash("danger This email does not exist")
+            return redirect(url_for("login"))
+        else:
+            is_match = check_password_hash(user.password, login_form["password"])
+            if is_match:
+                login_user(user)
+                return redirect(url_for("home"))
+            else:
+                flash("danger Incorrect Password")
+                return redirect(url_for("login"))
     return render_template("log-in.html")
 
-@app.route('/register')
+@app.route('/register', methods=["POST", "GET"])
 def register():
+    register_form = request.form
+    if request.method == "POST":
+        pwd = generate_password_hash(password=register_form["password"], method="pbkdf2:sha256", salt_length=8)
+        email = register_form["email"].lower()
+        name = register_form["name"]
+        phone = register_form["phone"]
+        new_user = User(
+            phone=phone,
+            email=email,
+            name=name,
+            password=pwd
+        )
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+        except IntegrityError:
+            flash("danger Email is registered already, Kindly login instead")
+            return redirect(url_for("login"))
+        else:
+            new_user = db.session.query(User).filter_by(email=email).first()
+            login_user(new_user)
+            return redirect(url_for("home"))
     return render_template("register.html")
 
 @app.route('/recover-password')
@@ -262,9 +329,6 @@ def pricing():
 def testimonials():
     return render_template("testimonials.html")
 
-@app.route('/products')
-def products():
-    return render_template("products.html")
 
 @app.route('/cart')
 def cart():
@@ -319,11 +383,152 @@ def service_details():
 
 @app.route('/blog')
 def blog():
-    return render_template("blog-column-one.html")
+    posts = BlogPost.query.all()
+    return render_template("blog-column-one.html", all_posts=posts)
 
-@app.route('/blog-post')
-def blog_post():
-    return render_template("blog-details.html")
+@app.route("/edit-post/<int:post_id>", methods=["POST", "GET"])
+def edit_post(post_id):
+    post = BlogPost.query.get(post_id)
+    edit_form = CreatePostForm(
+        title=post.title,
+        subtitle=post.subtitle,
+        img_url=post.img_url,
+        # author=post.author,
+        body=post.body
+    )
+    if edit_form.validate_on_submit():
+        post.title = edit_form.title.data
+        post.subtitle = edit_form.subtitle.data
+        post.img_url = edit_form.img_url.data
+        # post.author = edit_form.author.data
+        post.body = edit_form.body.data
+        db.session.commit()
+        return redirect(url_for("show_post", post_id=post.id))
+
+    return render_template("make-post.html", form=edit_form)
+
+
+@app.route("/product/<int:product_id>", methods=["POST", "GET"])
+def show_product(product_id):
+    requested_product = db.session.query(Product).get(product_id)
+    form = CreateProductForm()
+    if request.method == "post":
+        if current_user.is_authenticated:
+            comment= Comment(
+                author=current_user,
+                blog=requested_product,
+                text=form.comment.data,
+            )
+            db.session.add(comment)
+            db.session.commit()
+        else:
+            flash("danger You need to be logged in to edit products")
+            return redirect(url_for("login"))
+        return redirect(url_for("show_product", product_id=product_id, product=requested_product, form=form))
+    return render_template("products.html", product_id=product_id, product=requested_product, form=form)
+
+@app.route('/products')
+def products():
+    per_page = 6
+    page = request.args.get('page', 1, type=int)  # Get the current page from the query string or default to page 1
+
+    # Fetch blog posts from the database and paginate them
+    all_products = Product.query.paginate(page=page, per_page=per_page, error_out=False)
+    return render_template("products.html", all_products=all_products)
+
+@app.route("/edit-product/<int:product_id>", methods=["POST", "GET"])
+def edit_product(product_id):
+    product = Product.query.get(product_id)
+    edit_form = CreateProductForm(
+        title=product.title,
+        subtitle=product.subtitle,
+        img_url=product.img_url,
+        product_url=product.product_url,
+        price=product.price,
+        # body=post.body
+    )
+    if edit_form.validate_on_submit():
+        product.title = edit_form.title.data
+        product.subtitle = edit_form.subtitle.data
+        product.img_url = edit_form.img_url.data
+        product.product_url = edit_form.product_url.data
+        product.price = edit_form.price.data
+        
+        # post.author = edit_form.author.data
+        # post.body = edit_form.body.data
+        db.session.commit()
+        return redirect(url_for("show_product", product_id=product.id))
+
+    return render_template("make-product.html", form=edit_form)
+
+@app.route("/new-product", methods=["POST", "GET"])
+def add_new_product():
+    form = CreateProductForm()
+    if form.validate_on_submit():
+        new_product = Product(
+            title=form.title.data,
+            subtitle=form.subtitle.data,
+            img_url=form.img_url.data,
+            product_url=form.product_url.data,
+            price=form.price.data,
+            # body=form.body.data,
+            # img_url=form.img_url.data,
+            author=current_user,
+            date=date.today().strftime("%B %d, %Y")
+        )
+        db.session.add(new_product)
+        db.session.commit()
+        return redirect(url_for("products"))
+    return render_template("make-product.html", form=form)
+  
+
+
+@app.route("/post/<int:post_id>", methods=["POST", "GET"])
+def show_post(post_id):
+    requested_post = db.session.query(BlogPost).get(post_id)
+    comments =  db.session.query(Comment).filter_by(blog_id=post_id)
+    form = CommentForm()
+    post_id=post_id
+    if request.method == "POST":
+        if current_user.is_authenticated:
+            comment= Comment(
+                author=current_user,
+                blog=requested_post,
+                text=form.comment.data,
+            )
+            db.session.add(comment)
+            db.session.commit()
+        else:
+            flash("danger You need to be logged in to post comments")
+            return redirect(url_for("login"))
+        return redirect(url_for("show_post", post_id=post_id, post=requested_post, form=form, all_comments=comments))
+    return render_template("blog-details.html", post_id=post_id, post=requested_post, form=form, all_comments=comments)
+
+
+@app.route("/delete/<int:post_id>")
+@admins_only
+def delete_post(post_id):
+    post_to_delete = BlogPost.query.get(post_id)
+    db.session.delete(post_to_delete)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route("/new-post", methods=["POST", "GET"])
+def add_new_post():
+    form = CreatePostForm()
+    if form.validate_on_submit():
+        new_post = BlogPost(
+            title=form.title.data,
+            subtitle=form.subtitle.data,
+            body=form.body.data,
+            img_url=form.img_url.data,
+            author=current_user,
+            date=date.today().strftime("%B %d, %Y")
+        )
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("make-post.html", form=form)
 
 @app.route('/company')
 def company():

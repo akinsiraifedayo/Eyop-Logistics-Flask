@@ -1,0 +1,55 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+{% include "./reusables/header.html" %}
+   <!-- End Navbar Area -->
+  </header>
+  <!-- End Header Area -->
+  <!-- Start Page Title Area -->
+  <div class="page-title-area bg-23">
+   <div class="container">
+    <div class="page-title-content">
+      {% if is_edit: %}
+      <h2>Edit Post</h2>
+      {% else: %}
+      <h2>{{current_user.name}}</h2>
+      {% endif %}
+     <ul>
+      <li>
+       <a href="{{ url_for('home') }}">
+        Home
+       </a>
+      </li>
+      <li class="active">
+       Blog Details
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <!-- End Page Title Area -->
+  <!-- Start Blog Details Area -->
+  <div class="blog-details-area ptb-100">
+   <div class="container">
+    <div class="row">
+     <div class="col-lg-8">
+      <div class="blog-details-content">
+       <div class="blog-details-img">
+        <img alt="Image" src='{{ url_for("static", filename="img/blog-details/blog-details-1.jpg") }}'/>
+       </div>
+       <div class="blog-top-content">
+        <div class="news-content">
+          {{ ckeditor.load() }}
+          {{ ckeditor.config(name='body') }}
+          {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- End Blog Details Area -->
+  <!-- Start Footer Area -->
+  {% include "./reusables/footer.html" %}
+  {% endblock %}

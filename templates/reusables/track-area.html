@@ -23,8 +23,8 @@
                 {% with messages = get_flashed_messages() %}
                   {% if messages %}
                     {% for message in messages %}
-                    <p class="{{ message[1] }}">
-                      {{ message[0] }}
+                    <p class="alert alert-{{message[:7]}}">
+                      {{ message[7:] }}
                     </p>
                     {% endfor %}
                   {% endif %}

@@ -31,14 +31,23 @@
        Log in
       </h2>
      </div>
-     <form method="post">
+     <form method="post" action="{{ url_for('login') }}">
+      {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                    <p class="alert alert-{{message[:7]}}">
+                      {{ message[7:] }}
+                    </p>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
       <div class="row">
        <div class="col-12">
         <div class="form-group">
          <label>
-          Email or Phone
+          Email
          </label>
-         <input class="form-control" name="name" type="text"/>
+         <input class="form-control" name="email" type="text"/>
         </div>
        </div>
        <div class="col-12">

@@ -1,24 +1,25 @@
 <section class="main-contact-area ptb-100">
-    <div class="container" id="scroll-target">
+    <div class="container" >
      <div class="section-title">
       <h2>
        Ask a Question
       </h2>
      </div>
-     <form id="contactFormd" action="{{ url_for('send_contact_email') }}" method="post" > 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          {% for message in messages %}
-          <p class="{{ message[1] }}">
-            {{ message[0] }}
-          </p>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
+  
+     <form id="contactFormd" action="{{ url_for('send_contact_email') }}" method="post"> 
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+        <p class="alert alert-{{message[:7]}}">
+          {{ message[7:] }}
+        </p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
       
       <div class="row">
        <div class="col-lg-6 col-sm-6">
-        {% if sent != "True" %}
+        {% if sent != "Trueee" %}
         <div class="form-group">
          <input class="form-control" data-error="Please enter your name" id="name" name="name" placeholder="Your Name" required="" type="text"/>
          <div class="help-block with-errors">

@@ -15,7 +15,7 @@ window.onload = function() {
 		// Check if the target element exists
 		if (targetElement) {
 			// Calculate the Y position of the target element
-			var targetPosition = targetElement.getBoundingClientRect().top - 400 + window.scrollY;
+			var targetPosition = targetElement.getBoundingClientRect().top - 300 + window.scrollY;
 
 			// Scroll to the target position smoothly
 			window.scrollTo({

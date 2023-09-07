@@ -31,16 +31,16 @@ navigation_items = [
     {"label": "Blog", "url_for": "blog", "sub_items": None},
     {"label": "Company", "url_for": "company", "sub_items": None},
     {"label": "Contact Us", "url_for": "contact_us", "sub_items": None},
-    {
-        "label": "User",
-        "url_for": None,  # No direct link for the parent item
-        "sub_items": [
-            {"label": "My Account", "url_for": "my_account"},
-            {"label": "Log In", "url_for": "login"},
-            {"label": "Register", "url_for": "register"},
-            {"label": "Forgot Password", "url_for": "recover_password"},
-            # Add more sub-items as needed
-        ],
-    },
+    # {
+    #     "label": "User",
+    #     "url_for": None,  # No direct link for the parent item
+    #     "sub_items": [
+    #         {"label": "My Account", "url_for": "my_account"},
+    #         {"label": "Log In", "url_for": "login"},
+    #         {"label": "Register", "url_for": "register"},
+    #         {"label": "Forgot Password", "url_for": "recover_password"},
+    #         # Add more sub-items as needed
+    #     ],
+    # },
     # Add more navigation items as needed
 ]
