@@ -2,15 +2,23 @@
 </header>
 <!-- End Header Area -->
 <!-- Start Banner Area -->
-<section class="banner-area bg-1 jarallax" data-jarallax='{"speed": 0.3}'>
+
+<section class="banner-area banner-area-two">
+  <video autoplay="" class="background-video" loop="" muted="" poster="#">
+    <source src="{{ url_for('static', filename='img/banner/banner-video.mp4') }}" type="video/mp4" />
+  </video>
+<!-- <section class="banner-area bg-1 jarallax" data-jarallax='{"speed": 0.3}'> -->
   <div class="d-table">
     <div class="d-table-cell">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-9">
             <div class="banner-content">
-              <span class="top-title wow fadeInDown" data-wow-delay="1s">
+              <!-- <span class="top-title wow fadeInDown" data-wow-delay="1s">
                 Welcome to EYOP
+              </span> -->
+              <span data-wow-delay="1s"  class="top-title typewrite" data-period="2000" data-type='[ "Welcome to EYOP Logistics", "We are an AMAZON Logistics Partner." ]'>
+                
               </span>
               <h1 class="wow fadeInDown" data-wow-delay="1s">
                 Get The Best Transport And Logistics Support

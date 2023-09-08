@@ -48,6 +48,77 @@ Default Style
 ============================*/
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,100;1,300&display=swap");
+
+/* news start */
+.news-item {
+  width: 100%;
+  animation: slide 40s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes slide {
+  0% {
+      transform: translateX(170%);
+  }
+  100% {
+      transform: translateX(-170%);
+  }
+}
+/* news end */
+
+
+/* typing start */
+
+
+@keyframes cursorBlink {
+  0%, 75% {
+      opacity: 1;
+  }
+
+  76%, 100% {
+      opacity: 0;
+  }
+}
+
+@keyframes cursorBlinkErase {
+  0% {
+      content: '|'; /* Display cursor when erasing starts */
+  }
+  
+  100% {
+      content: ''; /* Hide cursor when erasing is complete */
+  }
+}
+
+@keyframes type {
+  0%, 100% {
+      width: 0px;
+  }
+
+  100% {
+      width: 100%;
+  }
+}
+
+@media(max-width: 330px) {
+  .typing {
+      font-size: 3rem;
+      animation: type 5s steps(10) 1;
+  }
+
+  @keyframes type {
+      0%, 100% {
+          width: 0px;
+      }
+
+      100% {
+          width: 100%;
+      }
+  }
+}
+
+/* typing end */
+
 body {
   font-size: 16px;
   font-family: "Lato", sans-serif;
@@ -1039,7 +1110,7 @@ Banner Area Style
   display: block;
   margin-bottom: 15px;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 40px;
 }
 
 .banner-content h1 {
