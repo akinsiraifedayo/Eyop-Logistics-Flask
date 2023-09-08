@@ -53,7 +53,7 @@ $body-family: 'Lato', sans-serif;
 $heading-font-family : 'Roboto', sans-serif;
 
 $body-color: #555555;
-$main-color: #0383ff;
+$main-color: #ff3e03;
 $heading-color: #000024;
 $white-color: #ffffff;
 $black-color: #000000;
@@ -1082,7 +1082,7 @@ About Area Style
 				height: 20px;
 				line-height: 20px;
 				border-radius: 50%;
-				background-color: #6db3f8;
+				background-color: #ff3e03;
 				text-align: center;
 				color: $white-color;
 			}
@@ -1281,7 +1281,7 @@ Counter Area Style
 		font-size: 40px;
 		border-radius: 50%;
 		color: $main-color;
-		background-color: rgba(0, 123, 255, 0.25);
+		background-color: rgba(248, 227, 221, 0.959);
 		display: inline-block;
 		margin: 0 auto 18px; 
 	}
