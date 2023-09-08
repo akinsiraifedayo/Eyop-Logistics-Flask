@@ -77,17 +77,16 @@
         <ul>
          {% for comment in all_comments %} 
          <li>
-          <img alt="Image" src='{{ comment.author.email |gravatar }}'/>
+          <img alt="Image" src='{{ comment.author.email |gravatar }}' class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;">
+
           <h3>
             {{ comment.author.name|e }}
           </h3>
-          <!-- <span>
-           Monday, October 20, 2020
-          </span> -->
+          <span>
+            {{ comment.date|e }}
+          </span>
           <p>{{ comment.text|e }}</p>
-          <a href="#">
-           Reply
-          </a>
+          
          </li>
          {% endfor %}
         </ul>

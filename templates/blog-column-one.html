@@ -23,20 +23,32 @@
   </div>
   <!-- End Page Title Area -->
   <!-- Start Blog Column One Area -->
-  <section class="blog-column-one-area ptb-100">
+  <section class="blog-column-three-area ptb-100">
    <div class="container">
     <div class="row">
-     <div class="col-lg-8">
-      <div class="row">
+      {% if current_user.type == 'admin' %}
+      <div class="row align-items-center">
+        <a class="default-btn" href="{{ url_for('add_new_post') }}">
+          <span>
+          Add Post
+          </span>
+        </a>
+      </div><br><br><br><br>
+      
+    {% endif %}
+    </div>
+    <div class="row">
+     <!-- <div class="col-lg-8"> -->
+      
         {% for post in all_posts %}
-           
-        
-        
-       <div class="col-lg-12 col-md-6">
+       
+       
+       <div class="col-lg-3 col-md-6">
+        <div class="card blog-card">
         <div class="single-blog-post">
          <div class="post-image">
-          <a href="#">
-           <img alt="image" src='{{ post.img_url }}'/>
+          <a href="{{ url_for('show_post', post_id=post.id) }}">
+           <img alt="image" src='{{ post.img_url }}' class="card-img-top fixed-img"/>
           </a>
          </div>
          <div class="blog-content">
@@ -48,7 +60,7 @@
            </span>
           </div>
           <h3>
-           <a href="#">
+           <a href="{{ url_for('show_post', post_id=post.id) }}">
             {{post.title}}
            </a>
           </h3>
@@ -60,35 +72,62 @@
             Read More
            </span>
           </a>
+          
+          {% if current_user.type == 'admin' %}
+          <a class="default-btn" href="{{ url_for('delete_post', post_id=post.id) }}">
+            <span>
+             Delete Post
+            </span>
+           </a>
+          {% endif %}
+
          </div>
         </div>
        </div>
+    </div>
        {% endfor %}
        <div class="col-lg-12 col-md-12">
+
+
+
         <div class="pagination-area">
-         
-          <!-- <a href="#" class="prev page-numbers">
-          <i class="bx bx-chevron-left"></i>
-          </a> -->
-									
-         <span aria-current="page" class="page-numbers current">
-          1
-         </span>
-         <a class="page-numbers" href="#">
-          2
-         </a>
-         <a class="page-numbers" href="#">
-          3
-         </a>
-         <a class="next page-numbers" href="#">
-          <i class="bx bx-chevron-right">
-          </i>
-         </a>
-        </div>
+          {% if all_posts.has_prev %}
+              <a href="{{ url_for('products', page=all_posts.prev_num) }}" class="prev page-numbers"><i class="bx bx-chevron-left"></i></a>
+          {% endif %}
+  
+          {% for page_num in all_posts.iter_pages() %}
+              {% if page_num %}
+                  {% if page_num == all_posts.page %}
+                  <span aria-current="page" class="page-numbers current">
+                    {{ page_num }}
+                   </span>
+                      
+                  {% else %}
+                  <a class="page-numbers" href="{{ url_for('product', page=page_num) }}">
+                    {{ page_num }}
+                   </a>
+                  {% endif %}
+              {% else %}
+                  <span>...</span>
+              {% endif %}
+          {% endfor %}
+  
+          {% if all_posts.has_next %}
+          <a class="next page-numbers" href="{{ url_for('products', page=all_posts.next_num) }}">
+            <i class="bx bx-chevron-right">
+            </i>
+           </a>
+          {% endif %}
+      </div>
+
+
+        
+        
        </div>
        
     </div>
-   </div>
+  </div>
+
   </section>
   <!-- End Blog Column One Area -->
   <!-- Start Footer Area -->

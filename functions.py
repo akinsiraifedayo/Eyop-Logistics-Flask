@@ -9,6 +9,9 @@ navigation_items = [
             {"label": "Pricing", "url_for": "pricing"},
             {"label": "Testimonials", "url_for": "testimonials"},
             {"label": "Our Team", "url_for": "team"},
+            {"label": "FAQ", "url_for": "faq"},
+            {"label": "Privacy Policy", "url_for": "privacy_policy"},
+            {"label": "Terms and Conditions", "url_for": "terms_and_conditions"},
             # Add more sub-items as needed
         ],
     },
@@ -17,13 +20,10 @@ navigation_items = [
         "url_for": None,  # No direct link for the parent item
         "sub_items": [
             {"label": "Products", "url_for": "products"},
-            {"label": "Cart", "url_for": "cart"},
-            {"label": "Checkout", "url_for": "checkout"},
-            {"label": "Product Details", "url_for": "product_details"},
-            {"label": "Global Location", "url_for": "global_location"},
-            {"label": "FAQ", "url_for": "faq"},
-            {"label": "Privacy Policy", "url_for": "privacy_policy"},
-            {"label": "Terms and Conditions", "url_for": "terms_and_conditions"},
+            # {"label": "Cart", "url_for": "cart"},
+            # {"label": "Checkout", "url_for": "checkout"},
+            # {"label": "Product Details", "url_for": "product_details"},
+            # {"label": "Global Location", "url_for": "global_location"},
             # Add more sub-items as needed
         ],
     },

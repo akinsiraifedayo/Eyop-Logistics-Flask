@@ -42,7 +42,7 @@
               <a href="#">
                 <img
                   alt="image"
-                  src='{{ url_for("static", filename="img/blog/blog-1.jpg") }}'
+                  src='{{ post.img_url }}'
                 />
               </a>
             </div>
@@ -62,12 +62,7 @@
               <a class="default-btn" href="{{ url_for('show_post', post_id=post.id) }}">
                 <span> Read More </span>
               </a>
-              {% if current_user.id == 1 %}
-              <a class="default-btn" href="{{ url_for('show_post', post_id=post.id) }}">
-                <span> Read More </span>
-              </a>
-              <a href="{{url_for('delete_post', post_id=post.id) }}">✘</a>
-              {% endif %}
+              
             </div>
           </div>
           {% endfor %}

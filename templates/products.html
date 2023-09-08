@@ -72,15 +72,15 @@
      </div>
     </div>
     <div class="row">
-     <div class="col-lg-4 col-sm-6">
       {% for product in all_products.items %}
-      
-    
+     <div class="col-lg-4 col-sm-6">
 
       <div class="single-product">
+        <a href="{{ product.product_url }}">
+
        <div class="product-img">
         <img alt="Image" src='{{ product.img_url }}'/>
-        <ul>
+        <!-- <ul>
          <li>
           <a data-bs-toggle="modal" href="#product-view-one">
            <i class="bx bx-show-alt">
@@ -93,9 +93,10 @@
            </i>
           </a>
          </li>
-        </ul>
+        </ul> -->
        </div>
-       <a href="{{ url_for('product_details') }}">
+       </a>
+       <a href="{{ product.product_url }}">
         <h3>
           {{ product.title }}
         </h3>
@@ -108,7 +109,17 @@
          Purchase Product
         </span>
        </a>
+       
+       {% if current_user.type == 'admin' %}
+       <a class="default-btn" href="{{ url_for('delete_product', product_id=product.id) }}">
+        <span>
+         Delete Product
+        </span>
+       </a>
+       {% endif %}
+
       </div>
+      
      </div>
      {% endfor %}
 
@@ -127,7 +138,7 @@
                  </span>
                     
                 {% else %}
-                <a class="page-numbers" href="{{ url_for('product', page=page_num) }}">
+                <a class="page-numbers" href="{{ url_for('products', page=page_num) }}">
                   {{ page_num }}
                  </a>
                 {% endif %}
@@ -204,6 +215,10 @@
         </div>
        </div>
       </div>
+
+
+
+      <!-- toggler -->
       <div class="col-lg-6 col-md-6">
        <div class="product-content">
         <h3>
@@ -334,6 +349,10 @@
         </div>
        </div>
       </div>
+
+
+
+
      </div>
     </div>
    </div>

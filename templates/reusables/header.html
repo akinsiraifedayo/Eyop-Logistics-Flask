@@ -153,7 +153,8 @@
       </div>
       <!-- Start Top Header -->
       <!-- Start Navbar Area -->
-      <div class="navbar-area">
+      <!-- <div class="navbar-area"> -->
+      <div class="navbar-area navbar-area-style-two">
         <div class="mobile-nav">
             <div class="container">
                 <div class="mobile-menu">
@@ -225,9 +226,9 @@
                                 <li class="nav-item">
                                   <a href="{{ url_for('recover_password') }}" class="nav-link {% if 'recover_password' == current_page %}active{% endif %}">Forgot Password</a>
                                 {% else %}
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                   <a href="{{ url_for('my_account') }}" class="nav-link {% if 'my_account' == current_page %}active{% endif %}">My Account</a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                   <a href="{{ url_for('logout') }}" class="nav-link">Log Out</a>
                                 </li>

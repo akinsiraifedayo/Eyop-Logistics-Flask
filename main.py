@@ -47,7 +47,7 @@ print(os.getenv('MY_EMAIL'))
 class User(db.Model, UserMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(250), unique=True)
+    type = db.Column(db.String(250))
     email = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
     name = db.Column(db.String(250), nullable=False)
@@ -97,6 +97,7 @@ class Comment(db.Model):
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
     author = db.relationship("User", back_populates="comments")
+    date = db.Column(db.String(255), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     blog = db.relationship("BlogPost", back_populates="comments")
     blog_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
@@ -130,7 +131,7 @@ def load_user(user_id):
 def admins_only(func):
     @wraps(func)
     def decorated_func(*args, **kwargs):
-        if current_user.id == 1:
+        if current_user.type == 'admin':
             return func(*args, **kwargs)
         else:
             return abort(403)
@@ -253,11 +254,12 @@ def login():
     if request.method == "POST":
         try:
             user=db.session.query(User).filter_by(email=login_form["email"]).first()
-        except:
-            flash("danger This email does not exist")
-            return redirect(url_for("login"))
-        else:
             is_match = check_password_hash(user.password, login_form["password"])
+        except:
+            flash("danger That email does not exist, please register instead")
+            return redirect(url_for("register"))
+        else:
+            
             if is_match:
                 login_user(user)
                 return redirect(url_for("home"))
@@ -278,7 +280,8 @@ def register():
             phone=phone,
             email=email,
             name=name,
-            password=pwd
+            password=pwd,
+            type="user",
         )
         try:
             db.session.add(new_user)
@@ -292,8 +295,11 @@ def register():
             return redirect(url_for("home"))
     return render_template("register.html")
 
-@app.route('/recover-password')
+@app.route('/recover-password', methods=["POST", "GET"])
 def recover_password():
+    if request.method == "POST":
+        flash("danger For Security Reasons, Please Tell Us Why You Want to Reset Your Password")
+        return redirect(url_for("contact_us"))
     return render_template("recover-password.html")
 
 @app.route('/faq', methods=['POST', 'GET'])
@@ -378,7 +384,12 @@ def service_details():
 
 @app.route('/blog')
 def blog():
-    posts = BlogPost.query.all()
+
+    per_page = 6
+    page = request.args.get('page', 1, type=int)  # Get the current page from the query string or default to page 1
+
+    # Fetch blog posts from the database and paginate them
+    posts = BlogPost.query.paginate(page=page, per_page=per_page, error_out=False)
     return render_template("blog-column-one.html", all_posts=posts)
 
 @app.route("/edit-post/<int:post_id>", methods=["POST", "GET"])
@@ -413,6 +424,7 @@ def show_product(product_id):
                 author=current_user,
                 blog=requested_product,
                 text=form.comment.data,
+                
             )
             db.session.add(comment)
             db.session.commit()
@@ -477,7 +489,13 @@ def add_new_product():
         return redirect(url_for("products"))
     return render_template("make-product.html", form=form)
   
-
+@app.route("/delete-product/<int:product_id>")
+@admins_only
+def delete_product(product_id):
+    product_to_delete = Product.query.get(product_id)
+    db.session.delete(product_to_delete)
+    db.session.commit()
+    return redirect(url_for('products'))
 
 @app.route("/post/<int:post_id>", methods=["POST", "GET"])
 def show_post(post_id):
@@ -491,6 +509,7 @@ def show_post(post_id):
                 author=current_user,
                 blog=requested_post,
                 text=form.comment.data,
+                date=date.today().strftime("%B %d, %Y"),
             )
             db.session.add(comment)
             db.session.commit()
@@ -507,7 +526,7 @@ def delete_post(post_id):
     post_to_delete = BlogPost.query.get(post_id)
     db.session.delete(post_to_delete)
     db.session.commit()
-    return redirect(url_for('home'))
+    return redirect(url_for('blog'))
 
 @app.route("/new-post", methods=["POST", "GET"])
 def add_new_post():
@@ -523,7 +542,7 @@ def add_new_post():
         )
         db.session.add(new_post)
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("blog"))
     return render_template("make-post.html", form=form)
 
 @app.route('/company')
