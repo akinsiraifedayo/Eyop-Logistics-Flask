@@ -47,6 +47,7 @@ print(os.getenv('MY_EMAIL'))
 class User(db.Model, UserMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(250), unique=True)
     email = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
     name = db.Column(db.String(250), nullable=False)
@@ -60,7 +61,7 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
     #Create reference to the User object, the "posts" refers to the posts protperty in the User class.
-    author = db.relationship("User", back_populates="posts")
+    author = db.relationship("User", back_populates="products")
     #Create Foreign Key, "users.id" the users refers to the tablename of User.
     author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
@@ -350,15 +351,9 @@ def team():
 def my_account():
     return render_template("my-account.html")
 
-
-
-
-
 @app.route('/global-location')
 def global_location():
     return render_template("global-location.html")
-
-
 
 @app.route('/privacy-policy')
 def privacy_policy():
@@ -457,14 +452,14 @@ def edit_product(product_id):
         # post.author = edit_form.author.data
         # post.body = edit_form.body.data
         db.session.commit()
-        return redirect(url_for("show_product", product_id=product.id))
+        return redirect(url_for("products"))
 
     return render_template("make-product.html", form=edit_form)
 
 @app.route("/new-product", methods=["POST", "GET"])
 def add_new_product():
     form = CreateProductForm()
-    if form.validate_on_submit():
+    if request.method == "POST":
         new_product = Product(
             title=form.title.data,
             subtitle=form.subtitle.data,
@@ -476,6 +471,7 @@ def add_new_product():
             author=current_user,
             date=date.today().strftime("%B %d, %Y")
         )
+        print("added")
         db.session.add(new_product)
         db.session.commit()
         return redirect(url_for("products"))

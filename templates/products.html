@@ -26,15 +26,26 @@
   <div class="product-area ptb-100">
    <div class="container">
     <div class="showing-result">
+    {% if current_user.type == 'admin' %}
+      <div class="row align-items-center">
+        <a class="default-btn" href="{{ url_for('add_new_product') }}">
+          <span>
+          Add Product
+          </span>
+         </a>
+        </div><br>
+    {% endif %}
+
      <div class="row align-items-center">
       <div class="col-lg-6 col-sm-6">
+       
        <div class="showing-result-count">
         <p>
-         Showing 1-8 of 14 results
+         Showing {{ all_products.page * all_products.per_page - (all_products.per_page - 1) }}- {{ all_products.page * all_products.per_page}} of {{all_products.total}} results
         </p>
        </div>
       </div>
-      <div class="col-lg-6 col-sm-6">
+      <!-- <div class="col-lg-6 col-sm-6">
        <div class="showing-top-bar-ordering">
         <select>
          <option value="1">
@@ -57,7 +68,7 @@
          </option>
         </select>
        </div>
-      </div>
+      </div> -->
      </div>
     </div>
     <div class="row">
@@ -110,7 +121,7 @@
 
         {% for page_num in all_products.iter_pages() %}
             {% if page_num %}
-                {% if page_num == blog_posts.page %}
+                {% if page_num == all_products.page %}
                 <span aria-current="page" class="page-numbers current">
                   {{ page_num }}
                  </span>
@@ -132,26 +143,7 @@
          </a>
         {% endif %}
     </div>
-      <div class="pagination-area">
-       <!--
-								<a href="#" class="prev page-numbers">
-								<i class="bx bx-chevron-left"></i>
-							</a>
-							-->
-       <span aria-current="page" class="page-numbers current">
-        1
-       </span>
-       <a class="page-numbers" href="#">
-        2
-       </a>
-       <a class="page-numbers" href="#">
-        3
-       </a>
-       <a class="next page-numbers" href="#">
-        <i class="bx bx-chevron-right">
-        </i>
-       </a>
-      </div>
+      
      </div>
     </div>
    </div>
