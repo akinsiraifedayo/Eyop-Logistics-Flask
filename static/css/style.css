@@ -62,18 +62,33 @@ Default Style
 /* card end */
 
 /* news start */
-.news-item {
+.header-left-content .news-item {
+  width: 100%; /* Set the width to 100% to take up the entire container */
+  overflow: hidden; /* Hide any overflow content */
   width: 100%;
   animation: slide 40s linear infinite;
   white-space: nowrap;
 }
 
+.header-left-content .news-item ul {
+  padding: 0; /* Remove default padding from the ul element */
+  margin: 0; /* Remove default margin from the ul element */
+  list-style-type: none; /* Remove the default list-style */
+  white-space: nowrap; /* Prevent line breaks within list items */
+}
+
+.header-left-content .news-item ul li {
+  display: inline; /* Display list items inline */
+  margin-right: 20px; /* Add some spacing between list items (adjust as needed) */
+  animation: slide 40s linear infinite; /* Apply the slide animation */
+}
+
 @keyframes slide {
   0% {
-      transform: translateX(170%);
+    transform: translateX(0%);
   }
   100% {
-      transform: translateX(-170%);
+    transform: translateX(-100%);
   }
 }
 /* news end */
