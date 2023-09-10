@@ -15,6 +15,7 @@ from flask_mail import Mail, Message
 from dotenv import load_dotenv
 import os, ssl
 from flask_paginate import Pagination
+import time
 
 
 app = Flask(__name__)
@@ -239,7 +240,8 @@ def coming_soonest():
 def home():
     posts = BlogPost.query.all()
     sent = request.args.get("sent")
-    return render_template("index.html", sent=sent, all_posts=posts)
+    timestamp = int(time.time())
+    return render_template("index.html", sent=sent, all_posts=posts, timestamp=timestamp )
 
 
 @app.route('/logout')
